@@ -101,3 +101,19 @@ Skipping 'debops.debops' as it is already installed
 Skipping 'cjsteel.development_environment' as it is already installed
 Skipping 'xlab_si.sesame' as it is already installed
 ```
+
+#### Ignored Files
+
+With this build process, it would get recursive with file ignores.
+That's because everything is put into `target/`, and before a certain
+Ansible version, everything on this folder level would get included
+in the `.tar.gz` file.. including the `.tar.gz` file.
+In this case, that means the file includes the old build of itself
+and install of its dependencies. Clearly not good. Cleaner current state is:
+
+```
+$ ls target/ansible_collections/alancoding/deps/
+FILES.json	MANIFEST.json
+```
+
+Empty collection is empty!
