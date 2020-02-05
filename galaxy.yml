@@ -69,7 +69,6 @@ issues: http://example.com/issue/tracker
 
 build_ignore:
 - target
-- README.md
 - LICENSE
 - Makefile
 - '*.tar.gz'

@@ -1,7 +1,7 @@
 VERSION=1.0.1
 
 build:
-	rm alancoding-deps-$(VERSION).tar.gz
+	rm -rf alancoding-deps-$(VERSION).tar.gz
 	ansible-galaxy collection build
 
 just_install:
