@@ -9,6 +9,8 @@ make install
 
 The install target will install it in a directory `target/`
 
+That is for the default test case, other cases will be in subfolders.
+
 #### What you should see
 
 Output from the install command:
