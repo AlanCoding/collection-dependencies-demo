@@ -142,7 +142,7 @@ collections:
   # - jacklotusho.f5_modules
   - xiaoping8385.query_job
   - purestorage.flasharray
-  - softasap.redis_box
+  # - softasap.redis_box  # null dependencies https://github.com/ansible/ansible/issues/67574
   - sikim_piolink.wfktest
   - darius_lim_zh.darius_collection
   - chillancezen.fortimanager

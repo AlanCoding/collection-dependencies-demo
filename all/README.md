@@ -16,12 +16,14 @@ What collections have a docs folder??
 find all/target -type d -name "docs"
 ```
 
-How large are the collections??
+How large are the collections?? All of them are 226M when taken together.
 
 ```
 du -sh all --max-depth=1
-du -sh all/target --max-depth=1
+du -h -d1 all/target/ansible_collections/ | sort -h
 ```
+
+The 2nd command orders the collections in order of size.
 
 #### Gripes about behavior
 

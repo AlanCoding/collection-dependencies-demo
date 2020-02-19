@@ -1,10 +1,10 @@
 namespace: alancoding
 name: everything
-version: 2020.2.18
+version: 2020.2.19
 readme: README.md
 authors:
 - Alan Rominger <alan.rominger@gmail.com>
-description: A testing collection that depends on all collections found in Ansible Galaxy
+description: A testing collection that depends on almost all collections found in Ansible Galaxy
 license:
 - GPL-2.0-or-later
 license_file: ''
@@ -153,7 +153,7 @@ dependencies:
   # jacklotusho.f5_modules: "*"
   xiaoping8385.query_job: "*"
   purestorage.flasharray: "*"
-  softasap.redis_box: "*"
+  # softasap.redis_box: "*"  # null dependencies https://github.com/ansible/ansible/issues/67574
   sikim_piolink.wfktest: "*"
   darius_lim_zh.darius_collection: "*"
   chillancezen.fortimanager: "*"
