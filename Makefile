@@ -1,5 +1,5 @@
-BUNDLE=$(shell ls alancoding-deps-*.tar.gz | tail -1)
-ALL_BUNDLE=$(shell ls all/alancoding-everything-*.tar.gz | tail -1)
+BUNDLE=$(shell ls -1at alancoding-deps-*.tar.gz | head -1)
+ALL_BUNDLE=$(shell ls -1at all/alancoding-everything-*.tar.gz | head -1)
 
 build:
 	rm -rf alancoding-deps-*.tar.gz
@@ -21,8 +21,12 @@ build_all:
 	ansible-galaxy collection build all --output-path=all -vvv
 
 just_install_all:
-	ANSIBLE_COLLECTIONS_PATHS=all/target ansible-galaxy collection install $(ALL_BUNDLE) -p all/target -vvv
+	ANSIBLE_COLLECTIONS_PATHS=all/target ansible-galaxy collection install $(ALL_BUNDLE) -f -p all/target -vvv
 
-install_all:
-	rm -rf all/target
-	make just_install_all
+install_all_requirements:
+	ANSIBLE_COLLECTIONS_PATHS=all/target ansible-galaxy collection install -r all/output.yml -p all/target -vvv
+
+# # this would take like 2 hours to run, so commenting out
+# install_all:
+# 	rm -rf all/target
+# 	make just_install_all

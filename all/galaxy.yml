@@ -1,6 +1,6 @@
 namespace: alancoding
 name: everything
-version: 2020.2.17
+version: 2020.2.18
 readme: README.md
 authors:
 - Alan Rominger <alan.rominger@gmail.com>
@@ -32,7 +32,7 @@ dependencies:
   devoperate.base: "*"
   engineerakki.aws_cvs: "*"
   robertdebock.rundeck_collection: "*"
-  softasap.swarm_box: "*"
+  # softasap.swarm_box: "*"  # 7 months old, install problem
   chrismeyersfsu.ansible_content_example: "*"
   network_automation.vlans: "*"
   sundari_28.elastic: "*"
@@ -59,7 +59,7 @@ dependencies:
   crivetimihai.development: "*"
   dcos.dcos_ansible_test: "*"
   mattclay.aws: "*"
-  newswangerd.c1: "*"
+  # newswangerd.c1: "*"  # checksum mismatch for MANIFEST
   nagios.ncpa_deploy_and_register: "*"
   dynatrace_innovationlab.dynatrace_collection: "*"
   crivetimihai.workstation: "*"
@@ -75,25 +75,25 @@ dependencies:
   sindhuparvathi_gopi.ansible_collection_dellos_template: "*"
   ipbhat.sample: "*"
   cwilloughby_bw.racktables: "*"
-  arista.eos: "*"
+  # arista.eos: "*"
   f5networks.f5_modules: "*"
   ygo74.windows: "*"
   virt_lightning.virt_lightning: "*"
-  ktdreyer.koji_ansible: "*"
+  # ktdreyer.koji_ansible: "*"
   sh4d1.scaleway: "*"
-  gvenkatachal.turnup: "*"
-  mnecas.collections: "*"
+  # gvenkatachal.turnup: "*"  # checksum mismatch in FILES
+  # mnecas.collections: "*"  # does not contain releases folder
   azure.rm: "*"
   sshnaidm.testme: "*"
   kensinfield.snapshot_report: "*"
   orionuser1.collection_simple_role_jadgwour: "*"
-  n3pjk.servicenow: "*"
+  # n3pjk.servicenow: "*"  # does not contain releases
   slapic.smartopsacademy_ansible_basics: "*"
   sindhuparvathi_gopi.ansible_collection_template: "*"
   kbreit.meraki: "*"
   sundari_28.elastic_runtime: "*"
   thomasmckay.quay: "*"
-  cisco.iosxr: "*"
+  # cisco.iosxr: "*"
   crivetimihai.server: "*"
   alancoding.basic: "*"
   mnecas.ovirt: "*"
@@ -117,7 +117,7 @@ dependencies:
   ssbarnea.dlrn: "*"
   alancoding.awx: "*"
   gvenkatachal.netauto: "*"
-  robertdebock.ansible_development_environment: "*"
+  # robertdebock.ansible_development_environment: "*"  # does not contain expected file in releases
   jonellis.sudoers: "*"
   cisco.mso: "*"
   ddimatos.ansible_collections_zos_sample: "*"
@@ -146,11 +146,11 @@ dependencies:
   artis3n.github_version: "*"
   dellemc.powermax: "*"
   abaez.hashicluster: "*"
-  rshad.collection_demo: "*"
+  # rshad.collection_demo: "*"  # does not contain expected tar.gz
   ylascombe.rancher: "*"
   rrey.grafana: "*"
   jalbertcruz.elixir: "*"
-  jacklotusho.f5_modules: "*"
+  # jacklotusho.f5_modules: "*"
   xiaoping8385.query_job: "*"
   purestorage.flasharray: "*"
   softasap.redis_box: "*"
@@ -165,7 +165,7 @@ dependencies:
   oybed.casl_galaxy: "*"
   sensu.sensu_go: "*"
   operator_sdk.util: "*"
-  alancoding.deps: "*"
+  # alancoding.deps: "*"  # max pinned version seems to not work
   ripclawffb.helix_core: "*"
   lyr.opendistrocollection: "*"
   newswangerd.collection_demo: "*"
@@ -174,9 +174,9 @@ dependencies:
   sivel.toiletwater: "*"
   pystol.actions: "*"
   purestorage.flashblade: "*"
-  vyos.vyos: "*"
+  # vyos.vyos: "*"
   ansible_vort.cloud: "*"
-  network.cli: "*"
+  # network.cli: "*"
   irixjp.sample_collection_hello: "*"
   andock.andock: "*"
   splunk.enterprise_security: "*"
@@ -212,7 +212,7 @@ dependencies:
   netbox_community.ansible_modules: "*"
   debops.roles01: "*"
   alvistack.kubernetes: "*"
-  freeipa.ansible_freeipa: "*"
+  # freeipa.ansible_freeipa: "*"
   arillso.test_do_not_use: "*"
   armar_reggans.foreman_basic_installer: "*"
   nokia.sros: "*"
@@ -222,10 +222,10 @@ dependencies:
   debops.debops: "*"
   casper_wu.test: "*"
   crivetimihai.virtualization: "*"
-  jgoutin.home: "*"
+  # jgoutin.home: "*"
   scicore.guacamole: "*"
-  ansible.netcommon: "*"
-  cisco.nxos: "*"
+  # ansible.netcommon: "*"
+  # cisco.nxos: "*"
   sundari_28.firstcoll: "*"
   check_point.mgmt: "*"
   ibm.ibm_zos_core: "*"

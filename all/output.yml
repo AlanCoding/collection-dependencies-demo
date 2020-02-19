@@ -1,0 +1,222 @@
+collections:
+  - joelwking.mongodb
+  - ganeshrn.test
+  # - mnecas.vm_infra
+  - chrismeyersfsu.test_things
+  - xlab_si.sesame
+  - micko920.homelab
+  - dcos.cluster
+  - jiuka.selenium
+  - vandanasubbu.vandana_collection
+  - mmorev.hashicorp
+  - xlab_si.demo_collection
+  - gavinfish.azuretest
+  - pravindmali.first_collection
+  - dbolotin.amix
+  - gavinfish.azureblob
+  - testing.k8s_demo_collection
+  - ompragash.my_first_collection
+  - chrismeyersfsu.tower_modules
+  - cjsteel.development_environment
+  - devoperate.base
+  - engineerakki.aws_cvs
+  - robertdebock.rundeck_collection
+  # - softasap.swarm_box
+  - chrismeyersfsu.ansible_content_example
+  - network_automation.vlans
+  - sundari_28.elastic
+  # - network.netconf
+  - sindhuparvathi_gopi.test_collection
+  - flowerysong.sensu_go
+  - netapp.azure
+  - nibhart1.collection_modules
+  - fortinet.fortios
+  - smile37773.rm
+  - mnecas.test
+  - softasap.monitored_box
+  - levonet.cd_migration
+  - drewmullen.vault_kv_migrate
+  - softasap.base_box
+  - vandanasubbu.wavefront_proxy_collection
+  # - lhoang2.beta_content  # checksum mismatch
+  - ibm.qradar
+  - thomasbaumeister.github_version
+  - spam_n_eggs.amazon
+  - cisco.intersight
+  - rrey.my_collection
+  - artis3n.github
+  - crivetimihai.development
+  - dcos.dcos_ansible_test
+  - mattclay.aws
+  # - newswangerd.c1  # checksum mismatch for MANIFEST
+  - nagios.ncpa_deploy_and_register
+  - dynatrace_innovationlab.dynatrace_collection
+  - crivetimihai.workstation
+  - dynatrace_innovationlab.collection
+  - gvenkatachal.common
+  - google.cloud
+  - gavinfish.collection
+  - geerlingguy.k8s
+  # - cisco.ios
+  - servicenow.servicenow
+  - tobikris.lanao
+  - lhoang2.common
+  - sindhuparvathi_gopi.ansible_collection_dellos_template
+  - ipbhat.sample
+  - cwilloughby_bw.racktables
+  # - arista.eos
+  - f5networks.f5_modules
+  - ygo74.windows
+  - virt_lightning.virt_lightning
+  # - ktdreyer.koji_ansible
+  - sh4d1.scaleway
+  # - gvenkatachal.turnup  # checksum mismatch in FILES
+  # - mnecas.collections  # does not contain releases
+  - azure.rm
+  - sshnaidm.testme
+  - kensinfield.snapshot_report
+  - orionuser1.collection_simple_role_jadgwour
+  # - n3pjk.servicenow  # does not contain releases
+  - slapic.smartopsacademy_ansible_basics
+  - sindhuparvathi_gopi.ansible_collection_template
+  - kbreit.meraki
+  - sundari_28.elastic_runtime
+  - thomasmckay.quay
+  # - cisco.iosxr
+  - crivetimihai.server
+  - alancoding.basic
+  - mnecas.ovirt
+  - tawr1024.netbox_modules
+  - asmacdo.operator_util
+  - lordoftheflies.ansible_collection_freeipa
+  - openafs_contrib.ansible_openafs
+  - geerlingguy.php_roles
+  - softasap.lamp_box
+  - astrobounce.ansible_roles
+  - google.cloud_collection
+  - cisco.meraki
+  - ansible_vorteil.cloud
+  - azure.azcollection
+  - anil_cm.terraform_provider
+  - frankshen01.testfortios
+  - openzaak.deploy
+  - cyberark.bizdev
+  - netapp_eseries.santricity
+  - hxtree.lxd_cloud
+  - ssbarnea.dlrn
+  - alancoding.awx
+  - gvenkatachal.netauto
+  # - robertdebock.ansible_development_environment  # does not contain expected file in releases
+  - jonellis.sudoers
+  - cisco.mso
+  - ddimatos.ansible_collections_zos_sample
+  - netapp_uk_ps.ontap
+  - opentelekomcloud.cloud
+  - seb_schulz.hello_ansible
+  - arubanetworks.aoscx
+  - smartopsacademy.ansible_basics
+  - cyberark.pas
+  - smartopsacademy.basics
+  - softasap.mariadb_box
+  - maxamillion.devel
+  - rubrikinc.cdm
+  - alikins.collection_inspect
+  - utoddl.logical
+  - tawr1024.netbox_collection
+  - tvartom.serveradmin
+  - artis3n.test_resource_do_not_use
+  - jacklotusho.zosag
+  - daniel_chung_broadcom.fos
+  - tirasa.syncope
+  - manala.roles
+  - lyr.development
+  - alafon.ezp_toolbox
+  - thadreez.ecs_collection
+  - artis3n.github_version
+  - dellemc.powermax
+  - abaez.hashicluster
+  # - rshad.collection_demo  # does not contain expected tar.gz
+  - ylascombe.rancher
+  - rrey.grafana
+  - jalbertcruz.elixir
+  # - jacklotusho.f5_modules
+  - xiaoping8385.query_job
+  - purestorage.flasharray
+  - softasap.redis_box
+  - sikim_piolink.wfktest
+  - darius_lim_zh.darius_collection
+  - chillancezen.fortimanager
+  - cisco.ucs
+  - sundari_28.mk
+  - netapp.aws
+  - wti.remote
+  - ddimatos.pgrep
+  - oybed.casl_galaxy
+  - sensu.sensu_go
+  - operator_sdk.util
+  # - alancoding.deps
+  - ripclawffb.helix_core
+  - lyr.opendistrocollection
+  - newswangerd.collection_demo
+  - robertdebock.development_environment
+  - piolink.ansible_collection_webfrontk
+  - sivel.toiletwater
+  - pystol.actions
+  - purestorage.flashblade
+  # - vyos.vyos
+  - ansible_vort.cloud
+  # - network.cli
+  - irixjp.sample_collection_hello
+  - andock.andock
+  - splunk.enterprise_security
+  - mafalb.ansible
+  - pureport.pureport
+  - davidban77.gns3
+  - lukasjuhrich.ceph_ansible
+  - debops.roles02
+  - pfsensible.core
+  - softasap.lamp_helper_box
+  - fiaasco.icinga2
+  - theforeman.foreman
+  - bot_bi.project
+  - nibhart1.collection_name
+  - jacklotusho.zosgalaxy
+  - netapp.ontap
+  - launchdarkly_labs.collection
+  - adlytaibi.sgws
+  - inverse_inc.packetfence
+  - awx.awx
+  - arista.cvp
+  - clay584.genie
+  - nttmcp.mcp
+  - debops.roles03
+  - arista.avd
+  - cisco.aci
+  - schmots1.ontap
+  - inverse_inc.windows
+  - renatoalmeidaoliveira.netero
+  - community.kubernetes
+  - netapp.elementsw
+  - juniper.space
+  - netbox_community.ansible_modules
+  - debops.roles01
+  - alvistack.kubernetes
+  # - freeipa.ansible_freeipa
+  - arillso.test_do_not_use
+  - armar_reggans.foreman_basic_installer
+  - nokia.sros
+  - paloaltonetworks.panos
+  - alvistack.kubernetes_collection
+  - yaegashi.azplugins
+  - debops.debops
+  - casper_wu.test
+  - crivetimihai.virtualization
+  # - jgoutin.home
+  - scicore.guacamole
+  # - ansible.netcommon
+  # - cisco.nxos
+  - sundari_28.firstcoll
+  - check_point.mgmt
+  - ibm.ibm_zos_core
+  - yaegashi.azurex
+  - fragmentedpacket.netbox_modules

@@ -1,6 +1,7 @@
 ### Ansible collection dependencies
 
-This is an example of a collection that has dependencies. How to use:
+This is an example of a collection that has dependencies. How to use locally
+from the root of the github repo:
 
 ```
 make build
