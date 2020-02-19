@@ -1,29 +1,40 @@
-### Everything from Galaxy
+### Collection that Depends on "Everything" from Galaxy
 
-re-generate the list:
+This is a genuine _installable_ collection that depends on a list of collections scraped from Ansible Galaxy.
+For various reasons, this does not include literally every single collection.
+Many collections are not installable, so one of the most time-consuming parts is identifying those.
+Some are just so old that they are no longer compatible with the `ansible-galaxy` commands.
+But in other cases, they do not install because they do not use X.Y.Z version.
+In yet other cases, users wrote `galaxy.yml` that blows up the commands.
 
-```
-python all/fetch.py
-```
+Expect installing this to _take a very long time_ unless you do so without deps.
+If you have a folder with all the deps (the whole of Galaxy) pre-downloaded, you can and should reuse those.
+Even with dependencies pre-installed, I find `make install_everything` takes about 50 seconds.
 
-These are put into the `galaxy.yml` file.
+You can re-generate the list of collection names with `python everything/fetch.py`.
+This also takes a very long time, but presumably these will change in the future.
+The collections identified from that script are put in the `galaxy.yml` file for this collection.
 
 #### Analysis
 
-What collections have a docs folder??
+How many collections have a docs folder??
+About 88, but several are internal to the same collection.
 
 ```
-find all/target -type d -name "docs"
+find everything/target -type d -name "docs" | wc -l
 ```
 
 How large are the collections?? All of them are 226M when taken together.
 
 ```
 du -sh all --max-depth=1
-du -h -d1 all/target/ansible_collections/ | sort -h
+du -h -d1 everything/target/ansible_collections/ | sort -h
 ```
 
 The 2nd command orders the collections in order of size.
+Small collections take 16K of space.
+The `awx.awx` collection as an example is in range of 300K.
+Largest collections are like 10-40M.
 
 #### Gripes about behavior
 
@@ -42,6 +53,7 @@ when you are giving it a .tar.gz file which is obviously a higher version
 than the installed one. (need to replicate further)
 
 Also, it doesn't seem to actually do dependency resolution:
+(need to write this up in issue)
 
 ```
 ERROR! Cannot meet dependency requirement 'debops.debops:1.1.4' for collection alancoding.deps from source 'https://galaxy.ansible.com/api/'. Available versions before last requirement added: 2.0.1

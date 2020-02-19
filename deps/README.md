@@ -4,8 +4,8 @@ This is an example of a collection that has dependencies. How to use locally
 from the root of the github repo:
 
 ```
-make build
-make install
+make build_deps
+make install_deps
 ```
 
 The install target will install it in a directory `target/`
