@@ -1,20 +1,12 @@
 BUNDLE=$(shell ls -1at alancoding-deps-*.tar.gz | head -1)
 ALL_BUNDLE=$(shell ls -1at all/alancoding-everything-*.tar.gz | head -1)
 
-build:
+build_deps:
 	rm -rf alancoding-deps-*.tar.gz
 	ansible-galaxy collection build -vvv
 
-just_install:
+install_deps:
 	ANSIBLE_COLLECTIONS_PATHS=target ansible-galaxy collection install $(BUNDLE) -f -p target -vvv
-
-install:
-	rm -rf target
-	make just_install
-
-install_one:
-	rm -rf target/ansible_collections/alancoding/deps/
-	make just_install
 
 build_all:
 	rm -rf all/alancoding-everything-*.tar.gz

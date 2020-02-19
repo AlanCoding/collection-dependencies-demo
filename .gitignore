@@ -1,5 +1,6 @@
 *.tar.gz
 
 /target
+/deps/target
 /all/target
 /bug_debops/target
