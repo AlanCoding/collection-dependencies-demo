@@ -1,0 +1,25 @@
+namespace: alancoding
+name: bug
+version: 0.0.1
+readme: README.md
+authors:
+- Alan Rominger <alan.rominger@gmail.com>
+description: A testing collection that depends on debops collection
+license:
+- GPL-2.0-or-later
+license_file: ''
+tags: []
+dependencies:
+  # debops.debops: "*"
+  # gavinfish.azuretest: "*"
+  softasap.redis_box: "*"
+  # fragmentedpacket.netbox_modules: "*"
+
+repository: https://github.com/AlanCoding/collection-dependencies-demo
+documentation: https://github.com/AlanCoding/collection-dependencies-demo
+homepage: https://github.com/AlanCoding/collection-dependencies-demo
+issues: http://example.com/issue/tracker
+build_ignore:
+- target
+- output*.txt
+- '*.tar.gz'
