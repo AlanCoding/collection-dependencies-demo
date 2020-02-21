@@ -15,6 +15,48 @@ You can re-generate the list of collection names with `python everything/fetch.p
 This also takes a very long time, but presumably these will change in the future.
 The collections identified from that script are put in the `galaxy.yml` file for this collection.
 
+Turned out the `2020.2.19` version may not install out of the box after all.
+It was tested with the PR that fixes the null dependency problem.
+The first instance of this `softasap.redis_box` was removed to address the problem,
+but it turns out the following also have the issue.
+
+```
+hxtree.lxd_cloud
+lordoftheflies.ansible_collection_freeipa
+gavinfish.azuretest
+orionuser1.collection_simple_role_jadgwour
+sindhuparvathi_gopi.ansible_collection_template
+sindhuparvathi_gopi.ansible_collection_dellos_template
+tirasa.syncope
+anil_cm.terraform_provider
+softasap.base_box
+softasap.redis_box
+softasap.mariadb_box
+softasap.lamp_box
+softasap.lamp_helper_box
+softasap.monitored_box
+ipbhat.sample
+virt_lightning.virt_lightning
+```
+
+A fix for this particular issue when `galaxy.yml` defined `dependencies: {}`
+was merged, so with current Ansible `devel` this should work, but in older
+versions this `alancoding.everything` may still be un-installable.
+
+#### Dependency Graph Script
+
+I was going to make a graph of the collection dependencies.
+That is incomplete, but if I did do it, you would need:
+
+```
+pip install graphviz
+```
+
+Instead, I re-tooled it to inspect all the installed collections
+for a particular metadata property, ex `python everything/dep_graph.py tags`
+this might be helpful if you want to see how others tend to format
+their tags.
+
 #### Analysis
 
 How many collections have a docs folder??
@@ -35,6 +77,12 @@ The 2nd command orders the collections in order of size.
 Small collections take 16K of space.
 The `awx.awx` collection as an example is in range of 300K.
 Largest collections are like 10-40M.
+
+Find everyone who packaged log files, or json content
+
+```
+find everything/target/ -name "*.log"
+```
 
 #### Gripes about behavior
 
