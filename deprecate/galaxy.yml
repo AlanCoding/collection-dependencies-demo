@@ -1,0 +1,17 @@
+namespace: alancoding
+name: deprecate
+version: 1.0.0
+readme: README.md
+authors:
+- Alan Rominger <arominge@redhat.com>
+description: tests deprecating a module
+license:
+- GPL-2.0-or-later
+license_file: ''
+tags: []
+dependencies: {}
+repository: https://github.com/AlanCoding/collection-dependencies-demo
+documentation: https://github.com/AlanCoding/collection-dependencies-demo
+homepage: https://github.com/AlanCoding/collection-dependencies-demo
+issues: https://github.com/AlanCoding/collection-dependencies-demo
+build_ignore: []

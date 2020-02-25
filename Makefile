@@ -32,3 +32,15 @@ repro_bug:
 # install_everything:
 # 	rm -rf everything/target
 # 	make just_install_everything
+
+build_deprecate:
+	rm -rf deprecate/alancoding-deprecate-*.tar.gz
+	rm -rf deprecate/target
+	ansible-galaxy collection build deprecate --output-path=deprecate -vvv
+
+install_deprecate:
+	ANSIBLE_COLLECTIONS_PATHS=deprecate/target ansible-galaxy collection install deprecate/alancoding-deprecate-1.0.0.tar.gz -f -p deprecate/target -vvv
+
+sanity_deprecate: build_deprecate install_deprecate
+	cd deprecate/target/ansible_collections/alancoding/deprecate && git init && git add .
+	cd deprecate/target/ansible_collections/alancoding/deprecate && ansible-test sanity
