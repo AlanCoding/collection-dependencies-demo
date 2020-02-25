@@ -9,7 +9,7 @@ __metaclass__ = type
 
 
 ANSIBLE_METADATA = {'metadata_version': '1.1',
-                    'status': ['preview'],
+                    'status': ['deprecated'],
                     'supported_by': 'community'}
 
 
@@ -18,6 +18,9 @@ DOCUMENTATION = '''
 module: tower_team
 author: "Wayne Witzel III (@wwitzel3)"
 version_added: "2.3"
+deprecated:
+    removed_in: "3.7"
+    why: Deprecated in favour of C(_import) module.
 short_description: create, update, or destroy Ansible Tower team.
 description:
     - Create, update, or destroy Ansible Tower teams. See
