@@ -1,0 +1,53 @@
+
+ ----- data from the BOTMETA ----- 
+
+$plugins/inventory/aws_ec2.py:
+  maintainers: $team_aws
+$plugins/inventory/foreman.py:
+  maintainers: $team_foreman
+$plugins/inventory/gcp_compute.py:
+  maintainers: $team_google
+  migrated_to: google.cloud
+  supershipit: $team_google
+$plugins/inventory/openstack.py:
+  keywords:
+  - openstack
+  - inventory
+  labels:
+  - cloud
+  maintainers: $team_openstack
+  migrated_to: openstack.cloud
+$plugins/inventory/tower.py:
+  migrated_to: awx.awx
+$plugins/inventory/vmware_vm_inventory.py:
+  ignored: cigamit jcpowermac mtnbikenc tchernomax ckotte
+  keywords:
+  - vmware inventory
+  - vmware dynamic inventory plugin
+  labels:
+  - vmware
+  - cloud
+  maintainers: $team_vmware
+
+
+
+ ----- data from the NWO ----- 
+
+awx.yml:
+- awx: tower
+community.yml:
+- amazon: aws_ec2
+- general: foreman
+- vmware: vmware_vm_inventory
+google.yml:
+- cloud: gcp_compute
+openstack.yml:
+- cloud: openstack
+
+
+
+ ----- Exceptions ----- 
+
+- ovirt
+- cloudforms
+
