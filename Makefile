@@ -57,5 +57,8 @@ build_awx_deps:
 	cd awx/theforeman.foreman && ansible-galaxy collection build
 
 install_awx_deps:  # run build_awx_deps before running this
+	rm -rf awx/target  # remove this later
+	# ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/community.general/community-general-*.tar.gz | head -1)
+	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/ansible.netcommon/ansible-netcommon-*.tar.gz | head -1)
 	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/ansible.amazon/ansible-amazon-*.tar.gz | head -1)
 
