@@ -13,3 +13,6 @@
 [submodule "awx/community.general"]
 	path = awx/community.general
 	url = https://github.com/ansible-collection-migration/community.general.git
+[submodule "awx/community.netcommon"]
+	path = awx/community.netcommon
+	url = https://github.com/ansible-collection-migration/ansible.netcommon.git
