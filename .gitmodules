@@ -1,0 +1,12 @@
+[submodule "awx/ansible.amazon"]
+	path = awx/ansible.amazon
+	url = https://github.com/ansible-collections/ansible.amazon.git
+[submodule "awx/openstack.cloud"]
+	path = awx/openstack.cloud
+	url = https://github.com/openstack/ansible-collections-openstack.git
+[submodule "awx/community.vmware"]
+	path = awx/community.vmware
+	url = https://github.com/ansible-collections/vmware.git
+[submodule "awx/theforeman.foreman"]
+	path = awx/theforeman.foreman
+	url = https://github.com/theforeman/foreman-ansible-modules.git
