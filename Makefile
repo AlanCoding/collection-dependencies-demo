@@ -64,7 +64,13 @@ install_awx_deps:  # run build_awx_deps before running this
 	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/community.vmware/community-vmware-*.tar.gz | head -1)
 	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/openstack.cloud/openstack-cloud-*.tar.gz | head -1)
 	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/theforeman.foreman/theforeman-foreman-*.tar.gz | head -1)
-	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install google.cloud
-	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install azure.azcollection
-	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install ovirt.ovirt_collection
+
+build_awx:
+	rm -rf awx/alancoding-awx_venv-*.tar.gz
+	ansible-galaxy collection build awx --output-path=awx -vvv
+
+install_awx:
+	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/alancoding-awx_venv-*.tar.gz | head -1)
+
+awx_scenario: build_awx_deps install_awx_deps build_awx install_awx
 
