@@ -1,0 +1,6 @@
+plugin_routing:
+  modules:
+    tower_team:
+      deprecation:
+        removal_date: 10/10/2021
+        warning_text: This is a demo of a deprecated module

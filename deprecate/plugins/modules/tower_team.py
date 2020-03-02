@@ -21,6 +21,7 @@ version_added: "2.3"
 deprecated:
     removed_in: "3.7"
     why: Deprecated in favour of C(_import) module.
+    alternative: foo
 short_description: create, update, or destroy Ansible Tower team.
 description:
     - Create, update, or destroy Ansible Tower teams. See
