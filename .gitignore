@@ -2,6 +2,7 @@
 
 /target
 /deps/target
+/awx/target
 /everything/target
 /bug_debops/target
 /deprecate/target
