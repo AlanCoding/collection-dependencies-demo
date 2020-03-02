@@ -48,7 +48,7 @@ sanity_deprecate: build_deprecate install_deprecate
 build_awx_deps:
 	git submodule foreach git clean -f
 	cd awx/community.general && ansible-galaxy collection build  # required by Amazon
-	cd awx/community.netcommon && ansible-galaxy collection build  # required by Amazon
+	cd awx/ansible.netcommon && ansible-galaxy collection build  # required by Amazon
 	cd awx/ansible.amazon && ansible-galaxy collection build
 	cd awx/community.vmware && ansible-galaxy collection build
 	rm -rf awx/openstack.cloud/galaxy.yml
@@ -61,4 +61,10 @@ install_awx_deps:  # run build_awx_deps before running this
 	# ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/community.general/community-general-*.tar.gz | head -1)
 	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/ansible.netcommon/ansible-netcommon-*.tar.gz | head -1)
 	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/ansible.amazon/ansible-amazon-*.tar.gz | head -1)
+	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/community.vmware/community-vmware-*.tar.gz | head -1)
+	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/openstack.cloud/openstack-cloud-*.tar.gz | head -1)
+	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install $(shell ls -1at awx/theforeman.foreman/theforeman-foreman-*.tar.gz | head -1)
+	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install google.cloud
+	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install azure.azcollection
+	ANSIBLE_COLLECTIONS_PATHS=awx/target ansible-galaxy collection install ovirt.ovirt_collection
 
