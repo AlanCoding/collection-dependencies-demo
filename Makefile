@@ -44,3 +44,15 @@ install_deprecate:
 sanity_deprecate: build_deprecate install_deprecate
 	cd deprecate/target/ansible_collections/alancoding/deprecate && git init && git add .
 	cd deprecate/target/ansible_collections/alancoding/deprecate && ansible-test sanity
+
+build_awx_deps:
+	rm -rf awx/ansible.amazon/ansible-amazon-*.tar.gz
+	cd awx/ansible.amazon && ansible-galaxy collection build
+	rm -rf awx/community.vmware/community-vmware-*.tar.gz
+	cd awx/community.vmware && ansible-galaxy collection build
+	rm -rf awx/openstack.cloud/galaxy.yml
+	cp awx/openstack.cloud/galaxy.yml.in awx/openstack.cloud/galaxy.yml
+	rm -rf awx/openstack.cloud/openstack-cloud-*.tar.gz
+	cd awx/openstack.cloud && ansible-galaxy collection build
+	rm -rf awx/theforeman.foreman/theforeman-foreman-*.tar.gz
+	cd awx/theforeman.foreman && ansible-galaxy collection build
