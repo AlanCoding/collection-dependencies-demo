@@ -10,9 +10,6 @@
 [submodule "awx/theforeman.foreman"]
 	path = awx/theforeman.foreman
 	url = https://github.com/theforeman/foreman-ansible-modules.git
-[submodule "awx/community.general"]
-	path = awx/community.general
-	url = https://github.com/ansible-collection-migration/community.general.git
 [submodule "awx/community.netcommon"]
 	path = awx/ansible.netcommon
 	url = https://github.com/ansible-collection-migration/ansible.netcommon.git
