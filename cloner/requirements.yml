@@ -1,0 +1,14 @@
+---
+collections:
+  - name: azure.azcollection
+    version: 0.1.1
+  - name: amazon.aws
+    version: 0.1.0
+  - name: theforeman.foreman
+    version: 0.7.0
+  - name: google.cloud
+    version: 0.0.9
+  - name: openstack.cloud
+    version: 0.0.1-dev85
+  - name: ovirt.ovirt_collection
+    version: 1.0.1
