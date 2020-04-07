@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  # collections:
+  #   - community.general  # does not work in 2.7
+  tasks:
+
+  - name: Clone this repo using the hg module
+    hg:
+      dest: target
+      repo: https://bitbucket.org/ansibleengineering/test-playbooks-hg

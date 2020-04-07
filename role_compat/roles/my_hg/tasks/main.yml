@@ -1,0 +1,4 @@
+- name: Clone this repo using the hg module
+  hg:
+    dest: "{{ playbook_dir }}/target"
+    repo: https://bitbucket.org/ansibleengineering/test-playbooks-hg
