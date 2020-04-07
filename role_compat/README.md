@@ -30,3 +30,14 @@ The offending line appears to be:
 collections:
 ^ here
 ```
+
+#### Uninstalled collection
+
+```
+ansible-playbook role_compat/missing_collection.yml
+```
+
+This shows that if a collection is listed under `collections:`, and this
+collection is not actually installed, then it will run anyway.
+
+It will not even give a warning.
