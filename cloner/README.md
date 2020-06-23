@@ -12,7 +12,7 @@ structure their code.
 First, create a new `requirements.sh` file.
 
 ```
-python cloner/get_sources.py cloner/requirements.yml
+python cloner/get_sources.py cloner/awx.yml target
 ```
 
 Then source the file it creates
@@ -28,7 +28,7 @@ takes about 7 seconds
 The normal way to do this the same thing would be:
 
 ```
-ansible-galaxy collection install --force -r cloner/requirements.yml
+ansible-galaxy collection install --force -r cloner/requirements.yml -p target
 ```
 
 But this gives older (released) snapshots, and sometimes you
@@ -42,7 +42,7 @@ of magnitude longer than the purely offline commands.
 This is a new feature, so compare:
 
 ```
-ansible-galaxy collection download -r cloner/requirements.yml -p cloner/download/
+ansible-galaxy collection download -r cloner/awx.yml -p cloner/download/
 ```
 
 takes about 2.5 minutes

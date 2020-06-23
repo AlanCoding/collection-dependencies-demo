@@ -25,7 +25,16 @@ import json
 print(json.dumps(source_data, indent=2))
 
 
+BASE_DIR = '~/.ansible/collections'
+
+if len(sys.argv) > 2:
+    BASE_DIR = sys.argv[2]
+    print('')
+    print(f'Using custom base directory of: {BASE_DIR}')
+
+
 clones = []
+clones.append(f'mkdir -p {BASE_DIR}/ansible_collections')
 
 
 for col_data in source_data['collections']:
@@ -58,14 +67,17 @@ for col_data in source_data['collections']:
     if repo is None:
         print(f'Could not find repo for {http_name}')
     else:
-        clones.append(f'rm -rf ~/.ansible/collections/ansible_collections/{namespace}/{col_name}/')
-        clones.append(f'mkdir -p ~/.ansible/collections/ansible_collections/{namespace}')
-        clones.append(f'git clone {repo}.git ~/.ansible/collections/ansible_collections/{namespace}/{col_name}')
+        clones.append(f'rm -rf {BASE_DIR}/ansible_collections/{namespace}/{col_name}/')
+        clones.append(f'mkdir -p {BASE_DIR}/ansible_collections/{namespace}')
+        clones.append(f'git clone {repo}.git {BASE_DIR}/ansible_collections/{namespace}/{col_name}')
 
 dest_path = os.path.join(os.path.dirname(__file__), 'requirements.sh')
 
 with open(dest_path, 'w') as f:
     f.write('\n'.join(clones))
 
-print('--------')
+print()
+print('----- Content written to file ---')
 print('\n'.join(clones))
+print()
+print(f'Written to file {dest_path}')
