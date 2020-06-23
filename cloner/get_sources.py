@@ -66,6 +66,8 @@ for col_data in source_data['collections']:
         elif candidate.endswith('.git'):
             repo = candidate[:-len('.git')]
             break
+    if '/tree/' in repo:
+        repo = repo[:repo.index('/tree/')]
     if repo is None:
         print(f'Could not find repo for {http_name}')
     else:
