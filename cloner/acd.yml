@@ -1,0 +1,122 @@
+---
+collections:  # https://github.com/ansible-community/ansible-build-data/blob/2.10.0a1/2.10/acd-2.10.build
+  - name: amazon.aws
+    version: '>=0.0.0,<1.0.0'
+  - name: ansible.netcommon
+    version: '>=0.0.0,<1.0.0'
+  - name: ansible.posix
+    version: '>=0.0.0,<1.0.0'
+  - name: ansible.windows
+    version: '>=0.0.0,<1.0.0'
+  - name: arista.eos
+    version: '>=0.0.0,<1.0.0'
+  - name: awx.awx
+    version: '>=12.0.0,<13.0.0'
+  - name: azure.azcollection
+    version: '>=0.0.0,<1.0.0'
+  - name: check_point.mgmt
+    version: '>=1.0.0,<2.0.0'
+  - name: chocolatey.chocolatey
+    version: '>=1.0.0,<2.0.0'
+  - name: cisco.aci
+    version: '>=0.0.0,<1.0.0'
+  - name: cisco.asa
+    version: '>=0.0.0,<1.0.0'
+  - name: cisco.intersight
+    version: '>=1.0.0,<2.0.0'
+  - name: cisco.ios
+    version: '>=0.0.0,<1.0.0'
+  - name: cisco.iosxr
+    version: '>=0.0.0,<1.0.0'
+  - name: cisco.meraki
+    version: '>=1.0.0,<2.0.0'
+  - name: cisco.mso
+    version: '>=0.0.0,<1.0.0'
+  - name: cisco.nxos
+    version: '>=0.0.0,<1.0.0'
+  - name: cisco.ucs
+    version: '>=1.0.0,<2.0.0'
+  - name: cloudscale_ch.cloud
+    version: '>=0.0.0,<1.0.0'
+  - name: community.aws
+    version: '>=0.0.0,<1.0.0'
+  - name: community.azure
+    version: '>=0.0.0,<1.0.0'
+  - name: community.crypto
+    version: '>=0.0.0,<1.0.0'
+  - name: community.general
+    version: '>=0.0.0,<1.0.0'
+  - name: community.grafana
+    version: '>=0.0.0,<1.0.0'
+  - name: community.kubernetes
+    version: '>=0.0.0,<1.0.0'
+  - name: community.libvirt
+    version: '>=0.0.0,<1.0.0'
+  - name: community.mongodb
+    version: '>=0.0.0,<1.0.0'
+  - name: community.network
+    version: '>=0.0.0,<1.0.0'
+  - name: community.rabbitmq
+    version: '>=0.0.0,<1.0.0'
+  - name: community.vmware
+    version: '>=0.0.0,<1.0.0'
+  - name: community.windows
+    version: '>=0.0.0,<1.0.0'
+  - name: community.zabbix
+    version: '>=0.0.0,<1.0.0'
+  - name: containers.podman
+    version: '>=1.0.0,<2.0.0'
+  - name: cyberark.pas
+    version: '>=1.0.0,<2.0.0'
+  - name: dellemc_networking.os10
+    version: '>=1.0.0,<2.0.0'
+  - name: f5networks.f5_modules
+    version: '>=1.0.0,<2.0.0'
+  - name: fortinet.fortimanager
+    version: '>=1.0.0,<2.0.0'
+  - name: fortinet.fortios
+    version: '>=1.0.0,<2.0.0'
+  - name: frr.frr
+    version: '>=0.0.0,<1.0.0'
+  - name: google.cloud
+    version: '>=0.0.0,<1.0.0'
+  - name: ibm.qradar
+    version: '>=0.0.0,<1.0.0'
+  - name: junipernetworks.junos
+    version: '>=0.0.0,<1.0.0'
+  - name: netapp.aws
+    version: '>=20.0.0,<21.0.0'
+  - name: netapp.elementsw
+    version: '>=20.0.0,<21.0.0'
+  - name: netapp.ontap
+    version: '>=20.0.0,<21.0.0'
+  - name: netbox.netbox
+    version: '>=0.0.0,<1.0.0'
+  - name: ngine_io.cloudstack
+    version: '>=0.0.0,<1.0.0'
+  - name: ngine_io.exoscale
+    version: '>=0.0.0,<1.0.0'
+  - name: ngine_io.vultr
+    version: '>=0.0.0,<1.0.0'
+  - name: openstack.cloud
+    version: '>=1.0.0,<2.0.0'
+  - name: openvswitch.openvswitch
+    version: '>=0.0.0,<1.0.0'
+  - name: ovirt.ovirt
+    version: '>=1.0.0,<2.0.0'
+  - name: purestorage.flasharray
+    version: '>=1.0.0,<2.0.0'
+  - name: purestorage.flashblade
+    version: '>=1.0.0,<2.0.0'
+  - name: servicenow.servicenow
+    version: '>=1.0.0,<2.0.0'
+  - name: skydive.skydive
+    version: '>=0.0.0,<1.0.0'
+  - name: splunk.es
+    version: '>=0.0.0,<1.0.0'
+  - name: theforeman.foreman
+    version: '>=0.0.0,<1.0.0'
+  - name: vyos.vyos
+    version: '>=0.0.0,<1.0.0'
+  - name: wti.remote
+    version: '>=1.0.0,<2.0.0'

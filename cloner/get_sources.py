@@ -55,6 +55,8 @@ for col_data in source_data['collections']:
     for key in ('homepage', 'repository', 'issues',):
         candidate = metadata[key]
         print('  ' + str(candidate))
+        if candidate is None:
+            continue
         if candidate.startswith('https://github.com'):
             repo = candidate
             break

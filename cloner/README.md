@@ -13,6 +13,7 @@ First, create a new `requirements.sh` file.
 
 ```
 python cloner/get_sources.py cloner/awx.yml target
+python cloner/get_sources.py cloner/acd.yml target
 ```
 
 Then source the file it creates
