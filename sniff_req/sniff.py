@@ -40,6 +40,7 @@ failed = {}
 
 for namespace in os.listdir(target_pythonpath):
     namespace_dir = os.path.join(target_pythonpath, namespace)
+    local_reqs = []
     for name in os.listdir(namespace_dir):
         collection_dir = os.path.join(namespace_dir, name)
         top_content = os.listdir(collection_dir)
@@ -47,6 +48,20 @@ for namespace in os.listdir(target_pythonpath):
             if lightbulb in top_content:
                 print(f'Found collection {namespace}.{name}')
                 collections[f'{namespace}.{name}'] = []
+
+for fqcn in collections.keys():
+    if target_collection and fqcn != target_collection:
+        continue
+    namespace, name = fqcn.split('.')
+    collection_dir = os.path.join(target_pythonpath, namespace, name)
+    for candidate in os.listdir(collection_dir):
+        if 'requirement' in candidate and 'txt' in candidate:
+            with open(os.path.join(collection_dir, candidate), 'r') as f:
+                req_text = f.read()
+            req_text = req_text.strip()
+            for line in req_text.split('\n'):
+                if req_text not in collections[fqcn]:
+                    collections[fqcn].append(line)
 
 
 sys.path.insert(0, os.path.join(os.getcwd(), target))
@@ -144,8 +159,8 @@ for fqcn in collections.keys():
                             for req in reqs:
                                 if not isinstance(req, str):
                                     raise Exception('Entry in requirements not string')
-                                if req not in collections[f'{namespace}.{name}']:
-                                    collections[f'{namespace}.{name}'].append(req)
+                                if req not in collections[fqcn]:
+                                    collections[fqcn].append(req)
                     except Exception:
                         print()
                         print(' ---- Error parsing documentation ----')
@@ -155,10 +170,10 @@ for fqcn in collections.keys():
                 print(f'    documentation: {has_doc} {is_yaml} {has_req}')
             except (ImportError, ValueError) as e:
                 print(f'  FAILED while sniffing {fq_import}')
-                failed.setdefault(f'{namespace}.{name}', [])
-                if str(e) not in failed[f'{namespace}.{name}']:
-                    failed[f'{namespace}.{name}'].append(str(e))
-                # failed[f'{namespace}.{name}'].append(f'{plugin_type}.{plugin}')
+                failed.setdefault(fqcn, [])
+                if str(e) not in failed[fqcn]:
+                    failed[fqcn].append(str(e))
+                # failed[fqcn].append(f'{plugin_type}.{plugin}')
                 for text in error_exceptions:
                     if text not in str(e):
                         raise
