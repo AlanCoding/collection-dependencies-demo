@@ -13,5 +13,13 @@ m = importlib.import_module(fq_import)
 
 doc = getattr(m, "DOCUMENTATION", "")
 
+if hasattr(m, 'ModuleDocFragment'):
+    doc = ''
+    doc_frag = m.ModuleDocFragment
+    for thing in dir(doc_frag):
+        if thing.isupper():
+            doc += getattr(doc_frag, thing)
+
+
 print(doc)
 

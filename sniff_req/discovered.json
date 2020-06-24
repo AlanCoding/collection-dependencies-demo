@@ -7,18 +7,21 @@
     "pynetbox"
   ],
   "amazon.aws": [
+    "python >= 2.6",
+    "boto",
     "boto3",
     "botocore",
     "must have public internet connectivity",
     "botocore>=1.10.0",
     "whitelisting in configuration - see examples section below for details.",
     "botocore>=1.5.45",
-    "boto3 >= 1.0.0",
-    "python >= 2.6",
-    "boto"
+    "boto3 >= 1.0.0"
   ],
   "cyberark.pas": [],
-  "azure.azcollection": [],
+  "azure.azcollection": [
+    "python >= 2.7",
+    "azure >= 2.0.0"
+  ],
   "dellemc_networking.os10": [],
   "google.cloud": [
     "requests >= 2.18.4",
@@ -26,11 +29,17 @@
     "python >= 2.6",
     "google-cloud-storage >= 1.2..0"
   ],
-  "ngine_io.exoscale": [],
+  "ngine_io.exoscale": [
+    "python >= 2.6"
+  ],
   "ngine_io.cloudstack": [
+    "python >= 2.6",
+    "cs >= 0.9.0",
     "yaml"
   ],
-  "ngine_io.vultr": [],
+  "ngine_io.vultr": [
+    "python >= 2.6"
+  ],
   "awx.awx": [
     "pytz",
     "python.dateutil >= 2.7.0",
@@ -41,7 +50,9 @@
     "pyyaml"
   ],
   "cisco.intersight": [],
-  "cisco.mso": [],
+  "cisco.mso": [
+    "Multi Site Orchestrator v2.1 or newer"
+  ],
   "cisco.iosxr": [
     "ncclient >= 0.5.3 when using netconf",
     "lxml >= 4.1.1 when using netconf",
@@ -92,6 +103,7 @@
   ],
   "vyos.vyos": [],
   "theforeman.foreman": [
+    "apypie",
     "requests >= 1.1",
     "whitelisting in configuration",
     "requests (python library)",
@@ -118,6 +130,34 @@
   "community.general": [
     "memcache (python lib)",
     "redis>=2.4.5 (python lib)",
+    "python >= 2.7",
+    "infinisdk",
+    "python >= 2.7.9",
+    "pylxca",
+    "pyxcli",
+    "purity_fb >= 1.1",
+    "hpe3par_sdk >= 1.0.2. Install using 'pip install hpe3par_sdk'",
+    "WSAPI service should be enabled on the 3PAR storage array.",
+    "Python >= 2.7",
+    "Docker SDK for Python: Please note that the L(docker-py,https://pypi.org/project/docker-py/) Python module has been superseded by L(docker,https://pypi.org/project/docker/) (see L(here,https://github.com/docker/docker-py/issues/1310) for details). This module does *not* work with docker-py.",
+    "openshift >= 0.8.2",
+    "An EMC VNX Storage device.",
+    "Ansible 2.7.",
+    "storops (0.5.10 or greater). Install using 'pip install storops'.",
+    "PyMySQL (Python 2.7 and Python 3.X), or",
+    "MySQLdb (Python 2.x)",
+    "Vexata VX100 storage array with VXOS >= v3.5.0 on storage array",
+    "vexatapi >= 0.0.1",
+    "VEXATA_USER and VEXATA_PASSWORD environment variables must be set if user and password arguments are not passed to the module directly.",
+    "psycopg2",
+    "Python SDK for Oracle Cloud Infrastructure U(https://oracle-cloud-infrastructure-python-sdk.readthedocs.io)",
+    "python >= 2.6",
+    "pyrax",
+    "manageiq-client U(https://github.com/ManageIQ/manageiq-api-client-python/)",
+    "ovirt-engine-sdk-python >= 4.3.0",
+    "The modules were developed with SolidFire 10.1",
+    "solidfire-sdk-python (1.1.0.92) or greater. Install using 'pip install solidfire-sdk-python'",
+    "python >= 3.6",
     "infoblox_client",
     "etcd3 >= 0.10",
     "infoblox-client",
@@ -137,7 +177,6 @@
     "redis (python library https://github.com/andymccurdy/redis-py/)",
     "keyring (python library)",
     "The controlling host running Ansible has a Conjur identity. (More: U(https://docs.conjur.org/Latest/en/Content/Get%20Started/key_concepts/machine_identity.html))",
-    "python >= 2.6",
     "requests >= 2.18.4",
     "google-auth >= 1.3.0",
     "credstash (python library)",
@@ -145,7 +184,6 @@
     "python-consul python library U(https://python-consul.readthedocs.io/en/latest/#installation)",
     "openshift >= 0.6",
     "PyYAML >= 3.11",
-    "python >= 2.7",
     "linode_api4 >= 2.0.0",
     "nmap CLI installed",
     "L(Docker Machine,https://docs.docker.com/machine/)",
@@ -229,14 +267,12 @@
     "github3.py >= 1.0.0a3",
     "Docker API >= 1.24",
     "munch",
-    "python >= 2.7.9",
     "hpOneView >= 4.0.0",
     "nc-dnsapi >= 0.1.3",
     "ipaddress",
     "apache-libcloud >= 0.19.0",
     "supervisorctl",
     "flatpak",
-    "python >= 3.6",
     "footmark >= 1.19.0",
     "spotinst_sdk >= 1.0.38",
     "open_iscsi library and tools (iscsiadm)",
@@ -250,7 +286,6 @@
     "itertools",
     "XenAPI",
     "dpkg-divert >= 1.15.0 (Debian family)",
-    "openshift >= 0.8.2",
     "python-gitlab python module",
     "ovh",
     "ohai",
@@ -331,7 +366,6 @@
     "bash",
     "google-cloud-pubsub >= 0.22.0",
     "lldpctl",
-    "psycopg2",
     "openssl",
     "keytool",
     "Valid Uptime Robot API Key",
@@ -390,6 +424,7 @@
     "L(Docker SDK for Python,https://docker-py.readthedocs.io/en/stable/) >= 2.0.0"
   ],
   "community.network": [
+    "ingatesdk >= 1.0.6",
     "pan-python",
     "avisdk",
     "Jinja2",
@@ -533,9 +568,9 @@
   ],
   "check_point.mgmt": [],
   "ovirt.ovirt": [
-    "ovirt-engine-sdk-python >= 4.2.4",
     "python >= 2.7",
-    "ovirt-engine-sdk-python >= 4.4.0"
+    "ovirt-engine-sdk-python >= 4.4.0",
+    "ovirt-engine-sdk-python >= 4.2.4"
   ],
   "openvswitch.openvswitch": [
     "ovs-vsctl",

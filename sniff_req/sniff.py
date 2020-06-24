@@ -94,9 +94,15 @@ for fqcn in collections.keys():
             try:
                 try:
                     m = importlib.import_module(fq_import)
-                    has_doc = hasattr(m, 'DOCUMENTATION')
-                    if not has_doc:
-                        doc = ''
+                    if not hasattr(m, 'DOCUMENTATION'):
+                        if hasattr(m, 'ModuleDocFragment'):
+                            doc = ''
+                            doc_frag = m.ModuleDocFragment
+                            for thing in dir(doc_frag):
+                                if thing.isupper():
+                                    doc += getattr(doc_frag, thing)
+                        else:
+                            doc = ''
                     else:
                         doc = m.DOCUMENTATION.strip('\n')
                 except Exception as e:
@@ -116,7 +122,8 @@ for fqcn in collections.keys():
                     out = subprocess.check_output(cmd, env=subp_env)
                     out = str(out, encoding='utf-8')
                     doc = str(out).strip('\n')
-                    has_doc = bool(doc)
+
+                has_doc = bool(doc)
 
                 doc = doc.strip('\n')
 
@@ -127,7 +134,7 @@ for fqcn in collections.keys():
                         doc_dict = from_yaml(doc)
                         # doc_dict = yaml.safe_load(doc)
                         if 'requirements' not in doc_dict and len(doc_dict) == 1:
-                            doc_dict = doc_dict.values()[0]
+                            doc_dict = list(doc_dict.values())[0]
                         is_yaml = True
                         if 'requirements' in doc_dict:
                             reqs = doc_dict['requirements']
