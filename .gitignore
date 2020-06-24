@@ -1,6 +1,8 @@
 *.tar.gz
 *.retry
 
+__pycache__/
+
 /target
 /deps/target
 /awx/target
