@@ -90,10 +90,8 @@ for fqcn in collections.keys():
                         if 'requirements' in doc_dict:
                             reqs = doc_dict['requirements']
                             has_req = True
-                            print('    yay requirements: {}'.format(reqs))
                             if not isinstance(reqs, list):
-                                print(f'!! got requirements as non-list !! {reqs}')
-                                raise Exception
+                                raise Exception(f'!! got requirements as non-list !! {reqs}')
                             for req in reqs:
                                 if not isinstance(req, str):
                                     raise Exception('Entry in requirements not string')
@@ -111,7 +109,7 @@ for fqcn in collections.keys():
 
 
 print()
-print(f'Inspected total of {plugin_ct}')
+print(f'Inspected total of {plugin_ct} plugins')
 print()
 
 print('At last, what we were looking for')
