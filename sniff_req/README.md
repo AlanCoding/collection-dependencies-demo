@@ -130,10 +130,27 @@ makes that import command work. Put up PR at
 
 https://github.com/ansible-collections/azure/pull/173
 
-The "bad magic number in" errors _might_ be transient and fixed by:
+The "bad magic number in" errors look to be the same category of error,
+where they import module_utils that should be inside the collection from
+the old location in Ansible 2.9. Such as:
+
+> bad magic number in 'ansible.module_utils.network'
+
+That module shouldn't exist, and should be moved to the netcommon collection.
+
+The error of "collection metadata was not loaded for collection ansible.netcommon"
+reflects something much more like a code bug.
+
+https://github.com/ansible/ansible/blob/51f6d129cbb30f42c445f7e2fecba68fe02d6f85/lib/ansible/utils/collection_loader/_collection_finder.py#L968
+
+This is only a secondary error from an original obfuscated error of
 
 ```
-find target -name '*.pyc' -delete
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap>", line 900, in _find_spec
+AttributeError: '_AnsibleCollectionFinder' object has no attribute 'find_spec'
 ```
 
-...but still testing that.
+The failed kubectl import also seems to be a bug:
+
+https://github.com/ansible-collections/community.general/pull/5#issuecomment-648561220
