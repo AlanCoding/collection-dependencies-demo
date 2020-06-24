@@ -221,3 +221,21 @@ Single-line replication:
 ```
 python -c "import pathlib, yaml; yaml.safe_load(pathlib.Path('sniff_req/gcp_test.yml').read_text())"
 ```
+
+### Testing with ansible-base
+
+Making a faux collection with Ansible base.
+The `plugins` directory is in `lib/ansible/plugins`
+
+This is copied to `target/ansible_collections/ansible/base` folder
+a blank `galaxy.yml` is added.
+This also copies the modules directory separately because it's done differently.
+
+```
+cp -Ra <ansible repo>/lib/ansible/plugins target/ansible_collections/ansible/base
+cp -Ra <ansible repo>/lib/ansible/modules target/ansible_collections/ansible/base/plugins/
+touch target/ansible_collections/ansible/base/galaxy.yml
+python sniff_req/sniff.py target ansible.base
+```
+
+from there, a lot of content had to be removed to obtain basic functionality.
