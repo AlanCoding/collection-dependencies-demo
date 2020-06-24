@@ -18,7 +18,7 @@ Take that folder and throw it into the script.
 
 ```
 brew install libvirt  # only macos
-pip install boto3 botocore linode_api4 libvirt-python pymongo pynetbox
+pip install boto3 botocore linode_api4 libvirt-python pymongo pynetbox msrest msrestazure pytz ucsmsdk python-memcached redis
 python sniff_req.py target
 ```
 
@@ -99,8 +99,12 @@ Since there is not a huge number of them, they are pasted here.
 }
 ```
 
+##### Local Dependency
+
 Some of these have resolutions, `pynetbox` just needed to be added to the
 pip installs.
+
+##### Azure module_utils from base
 
 The `azure.azcollection` seems genuinely concerning.
 This is not due to being out-of-date, because the entire point of creating
@@ -130,6 +134,8 @@ makes that import command work. Put up PR at
 
 https://github.com/ansible-collections/azure/pull/173
 
+##### Bad magic number from module_utils imported from base
+
 The "bad magic number in" errors look to be the same category of error,
 where they import module_utils that should be inside the collection from
 the old location in Ansible 2.9. Such as:
@@ -137,6 +143,12 @@ the old location in Ansible 2.9. Such as:
 > bad magic number in 'ansible.module_utils.network'
 
 That module shouldn't exist, and should be moved to the netcommon collection.
+
+This error was converted to other errors by running the
+`find target -name '*.pyc' -delete` kind of command in the Ansible core
+directory.
+
+##### Metadata not loaded
 
 The error of "collection metadata was not loaded for collection ansible.netcommon"
 reflects something much more like a code bug.
@@ -151,6 +163,61 @@ Traceback (most recent call last):
 AttributeError: '_AnsibleCollectionFinder' object has no attribute 'find_spec'
 ```
 
+Ultimately, the cause was found to be due to a prior import. Replicate
+locally by running:
+
+```
+$ PYTHONPATH=target:$PYTHONPATH python -c 'import ansible_collections.arista.eos.plugins.action.eos, ansible_collections.arista.eos.plugins.modules.eos_lldp_interfaces'
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap>", line 900, in _find_spec
+AttributeError: '_AnsibleCollectionFinder' object has no attribute 'find_spec'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 963, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 902, in _find_spec
+  File "<frozen importlib._bootstrap>", line 876, in _find_spec_legacy
+  File "/Users/alancoding/Documents/repos/ansible/lib/ansible/utils/collection_loader/_collection_finder.py", line 180, in find_module
+    return _AnsibleCollectionLoader(fullname=fullname, path_list=path)
+  File "/Users/alancoding/Documents/repos/ansible/lib/ansible/utils/collection_loader/_collection_finder.py", line 272, in __init__
+    self._subpackage_search_paths = self._get_subpackage_search_paths(self._candidate_paths)
+  File "/Users/alancoding/Documents/repos/ansible/lib/ansible/utils/collection_loader/_collection_finder.py", line 565, in _get_subpackage_search_paths
+    collection_meta = _get_collection_metadata(collection_name)
+  File "/Users/alancoding/Documents/repos/ansible/lib/ansible/utils/collection_loader/_collection_finder.py", line 968, in _get_collection_metadata
+    raise ValueError('collection metadata was not loaded for collection {0}'.format(collection_name))
+ValueError: collection metadata was not loaded for collection arista.eos
+```
+
+The source of the monkeypatch was then further hunted to:
+
+ - ansible_collections.ansible.netcommon.plugins.action.network
+ - ansible_collections.ansible.netcommon.plugins.action.xxxxx
+
+It looks like a very deep issue with how the ActionBase module does things,
+because even if all the logic from the network-specific action modules are
+removed, the behavior persists. Oddly, action modules from other collections
+will not cause this sort of trouble.
+
+Solution is to pass over these action modules for now.
+
+##### Kubectl move bug
+
 The failed kubectl import also seems to be a bug:
 
 https://github.com/ansible-collections/community.general/pull/5#issuecomment-648561220
+
+##### Parsing failures
+
+Some DOCUMENTATION could not be parsed, in some cases converting to a
+raw string fixed it.
+
+https://github.com/ansible-collections/google.cloud/issues/248
+
+Single-line replication:
+
+```
+python -c "import pathlib, yaml; yaml.safe_load(pathlib.Path('sniff_req/gcp_test.yml').read_text())"
+```

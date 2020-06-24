@@ -1,8 +1,10 @@
 import os
 import sys
 import importlib
-import importlib.util
-import yaml
+# import importlib.util
+# import yaml
+import subprocess
+from ansible.parsing.utils.yaml import from_yaml
 import json
 
 
@@ -11,12 +13,17 @@ if len(sys.argv) == 1:
 
 
 target = sys.argv[1]
+abs_target = os.path.join(os.getcwd(), target)
 
 if 'ansible_collections' in target:
     raise Exception('Your target directory is one level too deep.')
 
 
 target_pythonpath = os.path.join(target, 'ansible_collections')
+target_collection = None
+
+if len(sys.argv) > 2:
+    target_collection = sys.argv[2]
 
 
 a_ha_collection = (
@@ -43,24 +50,33 @@ for namespace in os.listdir(target_pythonpath):
 
 
 sys.path.insert(0, os.path.join(os.getcwd(), target))
+subp_env = os.environ.copy()
+if 'PYTHONPATH' in os.environ:
+    subp_env['PYTHONPATH'] = abs_target + ':' + os.environ['PYTHONPATH']
+else:
+    subp_env['PYTHONPATH'] = abs_target + ':'
+# os.chdir(os.getcwd())
 
 
 plugins_blacklist = (
     'terminal',  # frr
     'cliconf',
-    'httpapi'  # arista.eos
+    'httpapi',  # arista.eos
+    'action',  # ansible.netcommon parent action classes have problems
+    'module_utils'
+)
+# bugs which I have filed errors about
+error_exceptions = (
+    "No module named 'ansible_collections.community.general.plugins.connection.kubectl'",
 )
 plugin_ct = 0
 
 
 for fqcn in collections.keys():
+    if target_collection and fqcn != target_collection:
+        continue
     namespace, name = fqcn.split('.')
     plugins_dir = os.path.join(target_pythonpath, namespace, name, 'plugins')
-    # print(
-    #     collection_dir + '   ' + str(
-    #         [s for s in os.listdir(collection_dir) if not os.path.isdir(s)]
-    #     )
-    # )
     for plugin_type in os.listdir(plugins_dir):
         plugin_type_dir = os.path.join(plugins_dir, plugin_type)
         if not os.path.isdir(plugin_type_dir) or plugin_type in plugins_blacklist:
@@ -70,22 +86,48 @@ for fqcn in collections.keys():
             if not plugin_file.endswith('.py') or plugin_file == '__init__.py':
                 continue
             plugin, _ = plugin_file.rsplit('.')
-            print(f'  sniffing {plugin_type}: {namespace}.{name}.{plugin}')
             plugin_ct += 1
             fq_import = f'ansible_collections.{namespace}.{name}.plugins.{plugin_type}.{plugin}'
             plugin_path = os.path.join(plugin_type_dir, plugin)
+            print(f'  sniffing {plugin_type}: {namespace}.{name}.{plugin} - {fq_import}')
 
             try:
-                # spec = importlib.util.spec_from_file_location(fq_import, plugin_path)
-                # m = importlib.util.module_from_spec(spec)
-                m = importlib.import_module(fq_import)
-                has_doc = hasattr(m, 'DOCUMENTATION')
+                try:
+                    m = importlib.import_module(fq_import)
+                    has_doc = hasattr(m, 'DOCUMENTATION')
+                    if not has_doc:
+                        doc = ''
+                    else:
+                        doc = m.DOCUMENTATION.strip('\n')
+                except Exception as e:
+                    if 'collection metadata was not loaded' not in str(e):
+                        raise
+                    print('    falling back to import isolation because of error')
+                    # need import to be isolated
+                    cmd = [
+                        sys.executable,
+                        os.path.join(
+                            os.path.dirname(os.path.abspath(__file__)),
+                            'look_at.py'
+                        ),
+                        abs_target,
+                        fq_import
+                    ]
+                    out = subprocess.check_output(cmd, env=subp_env)
+                    out = str(out, encoding='utf-8')
+                    doc = str(out).strip('\n')
+                    has_doc = bool(doc)
+
+                doc = doc.strip('\n')
+
                 is_yaml = False
                 has_req = False
                 if has_doc:
-                    doc = m.DOCUMENTATION
                     try:
-                        doc_dict = yaml.load(doc)
+                        doc_dict = from_yaml(doc)
+                        # doc_dict = yaml.safe_load(doc)
+                        if 'requirements' not in doc_dict and len(doc_dict) == 1:
+                            doc_dict = doc_dict.values()[0]
                         is_yaml = True
                         if 'requirements' in doc_dict:
                             reqs = doc_dict['requirements']
@@ -98,14 +140,21 @@ for fqcn in collections.keys():
                                 if req not in collections[f'{namespace}.{name}']:
                                     collections[f'{namespace}.{name}'].append(req)
                     except Exception:
-                        pass
+                        print()
+                        print(' ---- Error parsing documentation ----')
+                        print(doc)
+                        print(' -------------------------------------')
+                        raise
                 print(f'    documentation: {has_doc} {is_yaml} {has_req}')
             except (ImportError, ValueError) as e:
-                print(f'  FAILED while sniffing {e}')
+                print(f'  FAILED while sniffing {fq_import}')
                 failed.setdefault(f'{namespace}.{name}', [])
                 if str(e) not in failed[f'{namespace}.{name}']:
                     failed[f'{namespace}.{name}'].append(str(e))
                 # failed[f'{namespace}.{name}'].append(f'{plugin_type}.{plugin}')
+                for text in error_exceptions:
+                    if text not in str(e):
+                        raise
 
 
 print()
