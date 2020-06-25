@@ -6,6 +6,7 @@ import importlib
 import subprocess
 from ansible.parsing.utils.yaml import from_yaml
 import json
+from ansible.plugins import loader
 
 
 if len(sys.argv) == 1:
@@ -64,13 +65,16 @@ for fqcn in collections.keys():
                     collections[fqcn].append(line)
 
 
-sys.path.insert(0, os.path.join(os.getcwd(), target))
+print()
+sys.path.insert(0, abs_target)
 subp_env = os.environ.copy()
 if 'PYTHONPATH' in os.environ:
     subp_env['PYTHONPATH'] = abs_target + ':' + os.environ['PYTHONPATH']
 else:
     subp_env['PYTHONPATH'] = abs_target + ':'
 # os.chdir(os.getcwd())
+
+os.environ['ANSIBLE_COLLECTIONS_PATH'] = abs_target
 
 
 plugins_blacklist = (
@@ -82,7 +86,10 @@ plugins_blacklist = (
 )
 # bugs which I have filed errors about
 error_exceptions = (
-    "No module named 'ansible_collections.community.general.plugins.connection.kubectl'",
+    # azure/azcollection/plugins/modules/azure_rm_appgateway.py
+    "No module named 'ansible.module_utils.network'",
+    # google/cloud/plugins/modules/gcp_compute_target_https_proxy_info.py
+    "No module named 'ansible.module_utils.gcp_utils'"
 )
 plugin_ct = 0
 
@@ -103,12 +110,18 @@ for fqcn in collections.keys():
             plugin, _ = plugin_file.rsplit('.')
             plugin_ct += 1
             fq_import = f'ansible_collections.{namespace}.{name}.plugins.{plugin_type}.{plugin}'
-            plugin_path = os.path.join(plugin_type_dir, plugin)
+            plugin_path = os.path.join(os.getcwd(), plugin_type_dir, plugin_file)
             print(f'  sniffing {plugin_type}: {namespace}.{name}.{plugin} - {fq_import}')
 
             try:
+                excs = []
                 try:
-                    m = importlib.import_module(fq_import)
+                    type_loader = getattr(loader, f'{plugin_type}_loader', None)
+                    assert type_loader is not None
+                    m = type_loader._load_module_source(
+                        f'{namespace}.{name}.{plugin}',
+                        plugin_path
+                    )
                     if not hasattr(m, 'DOCUMENTATION'):
                         if hasattr(m, 'ModuleDocFragment'):
                             doc = ''
@@ -120,23 +133,41 @@ for fqcn in collections.keys():
                             doc = ''
                     else:
                         doc = m.DOCUMENTATION.strip('\n')
-                except Exception as e:
-                    if 'collection metadata was not loaded' not in str(e):
-                        raise
-                    print('    falling back to import isolation because of error')
-                    # need import to be isolated
-                    cmd = [
-                        sys.executable,
-                        os.path.join(
-                            os.path.dirname(os.path.abspath(__file__)),
-                            'look_at.py'
-                        ),
-                        abs_target,
-                        fq_import
-                    ]
-                    out = subprocess.check_output(cmd, env=subp_env)
-                    out = str(out, encoding='utf-8')
-                    doc = str(out).strip('\n')
+
+                except Exception as e1:
+                    excs.append(e1)
+                    print('   falling back python import because loader not available: {}'.format(str(e1)))
+                    try:
+                        m = importlib.import_module(fq_import)
+                        if not hasattr(m, 'DOCUMENTATION'):
+                            if hasattr(m, 'ModuleDocFragment'):
+                                doc = ''
+                                doc_frag = m.ModuleDocFragment
+                                for thing in dir(doc_frag):
+                                    if thing.isupper():
+                                        doc += getattr(doc_frag, thing)
+                            else:
+                                doc = ''
+                        else:
+                            doc = m.DOCUMENTATION.strip('\n')
+                    except Exception as e2:
+                        excs.append(e2)
+                        # if 'collection metadata was not loaded' not in str(e):
+                        #     raise
+                        print('    falling back to import isolation because of error: {}'.format(e2))
+                        # need import to be isolated
+                        cmd = [
+                            sys.executable,
+                            os.path.join(
+                                os.path.dirname(os.path.abspath(__file__)),
+                                'look_at.py'
+                            ),
+                            abs_target,
+                            fq_import
+                        ]
+                        out = subprocess.check_output(cmd, env=subp_env)
+                        out = str(out, encoding='utf-8')
+                        doc = str(out).strip('\n')
 
                 has_doc = bool(doc)
 
@@ -168,15 +199,24 @@ for fqcn in collections.keys():
                         print(' -------------------------------------')
                         raise
                 print(f'    documentation: {has_doc} {is_yaml} {has_req}')
-            except (ImportError, ValueError) as e:
+            except Exception as e3:
+                excs.append(e3)
                 print(f'  FAILED while sniffing {fq_import}')
                 failed.setdefault(fqcn, [])
-                if str(e) not in failed[fqcn]:
-                    failed[fqcn].append(str(e))
+                if any(str(e) not in str(failed[fqcn]) for e in excs[:2]):
+                    failed[fqcn].extend([str(e) for e in excs])
                 # failed[fqcn].append(f'{plugin_type}.{plugin}')
+                passes = False
                 for text in error_exceptions:
-                    if text not in str(e):
-                        raise
+                    if any(text in str(e) for e in excs):
+                        passes = True
+                print()
+                print('The collections we could not assess because import failed')
+                print()
+                print(json.dumps(failed, indent=2))
+                print()
+                if not passes:
+                    raise
 
 
 print()
