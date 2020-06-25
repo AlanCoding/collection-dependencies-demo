@@ -1,10 +1,12 @@
 import os
 import sys
 import importlib
-# import importlib.util
-# import yaml
+import yaml
 import subprocess
+
 from ansible.parsing.utils.yaml import from_yaml
+from ansible.parsing.yaml.dumper import AnsibleDumper
+
 import json
 from ansible.plugins import loader
 
@@ -33,6 +35,22 @@ a_ha_collection = (
     'MANIFEST.json',
     'FILES.json'
 )
+
+
+with open('sniff_req/spec_ex.yml', 'r') as f:
+    ee_tmp_str = f.read()
+
+print('Execution environment template:')
+print(ee_tmp_str)
+
+ee_tmp_dict = from_yaml(ee_tmp_str)
+ee_tmp_dict['dependencies']['python'] = []
+ee_tmp_dict['dependencies']['system'] = []
+ee_tmp_dict['autogen'] = True
+
+print('dumped')
+results = yaml.dump(ee_tmp_dict, Dumper=AnsibleDumper, default_flow_style=False)
+print(results)
 
 
 collections = {}
@@ -82,7 +100,7 @@ plugins_blacklist = (
     'cliconf',
     'httpapi',  # arista.eos
     'action',  # ansible.netcommon parent action classes have problems
-    'module_utils'
+    'module_utils'  # rarely has DOCUMENTATION anyway
 )
 # bugs which I have filed errors about
 error_exceptions = (
@@ -218,6 +236,28 @@ for fqcn in collections.keys():
                 if not passes:
                     raise
 
+    ee_spec_path = os.path.join(
+        target_pythonpath, namespace, name, 'meta/execution-environment.yml'
+    )
+    ee_tmp_dict['dependencies']['python'] = collections[fqcn]
+    # assure meta directory exists
+    meta_dir = os.path.join(
+        target_pythonpath, namespace, name, 'meta'
+    )
+    if not os.path.exists(meta_dir):
+        os.makedirs(meta_dir)
+    if os.path.exists(ee_spec_path):
+        with open(ee_spec_path, 'r') as f:
+            current_ee = f.read()
+        current_ee_dict = from_yaml(current_ee)
+    else:
+        current_ee_dict = {'autogen': True}
+    results = yaml.dump(ee_tmp_dict, Dumper=AnsibleDumper, default_flow_style=False)
+    # only re-generate file if it has not been modified, use flag for this
+    if 'autogen' in current_ee_dict:
+        with open(ee_spec_path, 'w') as f:
+            f.write(results)
+
 
 print()
 print(f'Inspected total of {plugin_ct} plugins')
@@ -232,4 +272,3 @@ print()
 print('The collections we could not assess because import failed')
 print()
 print(json.dumps(failed, indent=2))
-
