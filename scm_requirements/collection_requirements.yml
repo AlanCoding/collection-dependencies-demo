@@ -14,3 +14,7 @@ collections:
 
   - name: file:///Users/alancoding/Documents/tower#awx_collection,in_place_everything
     type: git
+
+  # example that depends on community.general
+  - name: https://github.com/ansible-collections/community.mongodb.git
+    type: git

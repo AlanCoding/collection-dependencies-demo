@@ -245,3 +245,17 @@ A lot of strange issues also seem to be resolved by deleting the pycache dirs.
 ```
 find target -type d -name "__pycache__" -exec rm -r "{}" \;
 ```
+
+### Import Methods
+
+Apparently it can get quite complicated to import collection code.
+
+As of the last successful run of this with Ansible 2.10, the code winds
+up running imports via the methods:
+
+ - Ansible actual collection loader 212
+ - Direct python import 3675
+ - Import in subprocess to obtain isolation 576
+
+Because of the isolation fallback, this causes the script to take a
+very long time with all the ACD collections, on the order of 15 minutes.
