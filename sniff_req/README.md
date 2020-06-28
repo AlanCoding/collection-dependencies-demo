@@ -239,3 +239,9 @@ python sniff_req/sniff.py target ansible.base
 ```
 
 from there, a lot of content had to be removed to obtain basic functionality.
+
+A lot of strange issues also seem to be resolved by deleting the pycache dirs.
+
+```
+find target -type d -name "__pycache__" -exec rm -r "{}" \;
+```

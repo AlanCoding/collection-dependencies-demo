@@ -67,6 +67,9 @@ for namespace in os.listdir(target_pythonpath):
             if lightbulb in top_content:
                 print(f'Found collection {namespace}.{name}')
                 collections[f'{namespace}.{name}'] = []
+                break
+        else:
+            raise Exception(f'Path at {collection_dir} is not a collection')
 
 for fqcn in collections.keys():
     if target_collection and fqcn != target_collection:
@@ -102,14 +105,114 @@ plugins_blacklist = (
     'action',  # ansible.netcommon parent action classes have problems
     'module_utils'  # rarely has DOCUMENTATION anyway
 )
-# bugs which I have filed errors about
-error_exceptions = (
-    # azure/azcollection/plugins/modules/azure_rm_appgateway.py
-    "No module named 'ansible.module_utils.network'",
-    # google/cloud/plugins/modules/gcp_compute_target_https_proxy_info.py
-    "No module named 'ansible.module_utils.gcp_utils'"
-)
+# these seem to be due to some suspicious stale __pycache__ dirs
+error_exceptions = ()
+# (
+#     # azure/azcollection/plugins/modules/azure_rm_appgateway.py
+#     "No module named 'ansible.module_utils.network'",
+#     # google/cloud/plugins/modules/gcp_compute_target_https_proxy_info.py
+#     "No module named 'ansible.module_utils.gcp_utils'"
+# )
 plugin_ct = 0
+
+
+not_req_file = set((
+    'README.md',
+    'galaxy.yml',
+    'plugins',
+    'meta',
+    'examples',
+    'docs',
+    '.git',
+    '.github',
+    '.gitignore',
+    'COPYING',
+    'tests',
+    'test',
+    'changelogs',
+    'CODE_OF_CONDUCT.md',
+    'Makefile',
+    'LICENSE',
+    'ansible.cfg',
+    '.mailmap',
+    '.yamllint',
+    'CHANGELOG.rst',
+    'README.rst',
+    'playbooks',
+    'Development.md',
+    'misc',
+    'CODE-OF-CONDUCT.md',
+    'galaxy.yml.in',
+    'SECURITY.md',
+    'scripts',
+    'CONTRIBUTING.md',
+    'custom-cred-types',
+    'ignore-2.9.txt',
+    'CredScanSuppressions.json',
+    'pr-pipelines.yml',
+    'hacking',
+    'CHANGELOG.md',
+    'roles',
+    '.changelog',
+    '.ansible-lint',
+    'molecule',
+    'contrib',
+    'codecov.yml',
+    '.all-contributorsrc',
+    'setup.cfg',
+    'build.sh',
+    'ovirt-ansible-collection.spec.in',
+    'automation',
+    'automation.yaml',
+    'docker-compose.yml',
+    'travis_run.sh',
+    '.travis.yml',
+    '.zuul.yaml',
+    'LICENSE.txt',
+    'releases',
+    'MANIFEST.json',
+    'tools',
+    'azure-pipelines.yml',
+    'shippable.yml'
+    
+))
+req_files = {}
+
+
+used_lookup = 0
+used_import = 0
+used_process = 0
+
+
+for fqcn in collections.keys():
+    namespace, name = fqcn.split('.')
+    collection_dir = os.path.join(target_pythonpath, namespace, name)
+    for candidate in os.listdir(collection_dir):
+        if candidate not in not_req_file:
+            req_files.setdefault(fqcn, [])
+            req_files[fqcn].append(candidate)
+
+print()
+print('Candidate requirement files')
+print(json.dumps(req_files, indent=2))
+
+
+reverse_reqs = {}
+for k, v in req_files.items():
+    for f in v:
+        reverse_reqs.setdefault(f, [])
+        reverse_reqs[f].append(k)
+
+
+print()
+print('Pivoted requirements file')
+print(json.dumps(reverse_reqs, indent=2))
+
+print()
+print('Total collections in set: {}'.format(len(collections)))
+print('Total supported requirements {}'.format(len(
+    set(reverse_reqs.get('requirements.txt', [])) | set(reverse_reqs.get('bindep.txt', []))
+)))
 
 
 for fqcn in collections.keys():
@@ -151,6 +254,7 @@ for fqcn in collections.keys():
                             doc = ''
                     else:
                         doc = m.DOCUMENTATION.strip('\n')
+                    used_lookup += 1
 
                 except Exception as e1:
                     excs.append(e1)
@@ -168,6 +272,7 @@ for fqcn in collections.keys():
                                 doc = ''
                         else:
                             doc = m.DOCUMENTATION.strip('\n')
+                        used_import += 1
                     except Exception as e2:
                         excs.append(e2)
                         # if 'collection metadata was not loaded' not in str(e):
@@ -186,6 +291,7 @@ for fqcn in collections.keys():
                         out = subprocess.check_output(cmd, env=subp_env)
                         out = str(out, encoding='utf-8')
                         doc = str(out).strip('\n')
+                        used_process += 1
 
                 has_doc = bool(doc)
 
@@ -216,7 +322,7 @@ for fqcn in collections.keys():
                         print(doc)
                         print(' -------------------------------------')
                         raise
-                print(f'    documentation: {has_doc} {is_yaml} {has_req}')
+                # print(f'    documentation stats: {has_doc} {is_yaml} {has_req}')
             except Exception as e3:
                 excs.append(e3)
                 print(f'  FAILED while sniffing {fq_import}')
@@ -257,6 +363,11 @@ for fqcn in collections.keys():
     if 'autogen' in current_ee_dict:
         with open(ee_spec_path, 'w') as f:
             f.write(results)
+
+
+print()
+print(f'Ways imports were done: {used_lookup} {used_import} {used_process}')
+print()
 
 
 print()

@@ -21,8 +21,48 @@
     "coverage==4.5.4",
     "EOS v4.12 or greater"
   ],
+  "openstack.cloud": [
+    "ansible",
+    "ansible-base",
+    "openstacksdk",
+    "pycodestyle",
+    "flake8",
+    "pylint",
+    "voluptuous",
+    "yamllint",
+    "rstcheck",
+    "ruamel.yaml",
+    "galaxy-importer",
+    "tox",
+    "python >= 3.6",
+    "openstacksdk >= 0.12.0",
+    "openstacksdk >= 0.28",
+    "openstacksdk >= 0.44",
+    "openstacksdk >= 0.13.0",
+    "keystoneauth1 >= 3.4.0",
+    "jsonpatch"
+  ],
   "netbox.netbox": [
     "pynetbox"
+  ],
+  "netapp.ontap": [
+    "A physical or virtual clustered Data ONTAP system. The modules support Data ONTAP 9.1 and onward.",
+    "REST support requires ONTAP 9.6 or later.",
+    "Ansible 2.6",
+    "Ansible 2.9 or later is strongly recommended as it enables the new collection delivery system.",
+    "Python2 netapp-lib (2017.10.30) or later. Install using 'pip install netapp-lib'",
+    "Python3 netapp-lib (2018.11.13) or later. Install using 'pip install netapp-lib'",
+    "netapp-lib 2020.3.12 is strongly recommended as it provides better error reporting for connection issues.",
+    "To enable http on the cluster you must run the following commands 'set -privilege advanced;' 'system services web modify -http-enabled true;'",
+    "netapp_lib",
+    "Python package ipaddress. Install using 'pip install ipaddress'"
+  ],
+  "netapp.elementsw": [
+    "The modules were developed with SolidFire 10.1",
+    "solidfire-sdk-python (1.1.0.92) or greater. Install using 'pip install solidfire-sdk-python'"
+  ],
+  "netapp.aws": [
+    "See respective platform section for more details"
   ],
   "amazon.aws": [
     "python >= 2.6",
@@ -49,7 +89,7 @@
     "azure-mgmt-compute==10.0.0",
     "azure-mgmt-containerinstance==1.4.0",
     "azure-mgmt-containerregistry==2.0.0",
-    "azure-mgmt-containerservice==4.4.0",
+    "azure-mgmt-containerservice==9.1.0",
     "azure-mgmt-dns==2.1.0",
     "azure-mgmt-keyvault==1.1.0",
     "azure-mgmt-marketplaceordering==0.1.0",
@@ -80,6 +120,15 @@
     "azure >= 2.0.0"
   ],
   "dellemc_networking.os10": [],
+  "f5networks.f5_modules": [
+    "requests",
+    "Requires BIG-IP >= 12.1.0",
+    "The 'rpm' tool installed on the Ansible controller",
+    "BIG-IQ >= 5.3.0",
+    "BIG-IP >= v12.1.0",
+    "BIG-IP >= v12",
+    "BIG-IP >= v13.0.0"
+  ],
   "google.cloud": [
     "requests",
     "google-auth",
@@ -108,6 +157,17 @@
     "sys",
     "ansible-tower-cli >= 3.0.2",
     "pyyaml"
+  ],
+  "purestorage.flasharray": [
+    "python >= 2.7",
+    "purestorage >= 1.16",
+    "netaddr"
+  ],
+  "purestorage.flashblade": [
+    "python >= 2.7",
+    "purity_fb >= 1.9",
+    "netaddr",
+    "pytz"
   ],
   "cisco.intersight": [],
   "cisco.mso": [
@@ -317,6 +377,7 @@
   "community.general": [
     "memcache (python lib)",
     "redis>=2.4.5 (python lib)",
+    "oc (go binary)",
     "python >= 2.7",
     "infinisdk",
     "python >= 2.7.9",
@@ -344,7 +405,6 @@
     "ovirt-engine-sdk-python >= 4.3.0",
     "The modules were developed with SolidFire 10.1",
     "solidfire-sdk-python (1.1.0.92) or greater. Install using 'pip install solidfire-sdk-python'",
-    "python >= 3.6",
     "infoblox_client",
     "etcd3 >= 0.10",
     "infoblox-client",
@@ -460,7 +520,7 @@
     "apache-libcloud >= 0.19.0",
     "supervisorctl",
     "flatpak",
-    "footmark >= 1.19.0",
+    "footmark >= 1.1.16",
     "spotinst_sdk >= 1.0.38",
     "open_iscsi library and tools (iscsiadm)",
     "pyone",
@@ -524,7 +584,6 @@
     "The docker server >= 1.9.0",
     "python-gitlab >= 1.5.0",
     "Solaris 10 or 11",
-    "netstat",
     "A system with an active nosh service manager, see Notes for further information.",
     "PagerDuty API access",
     "manageiq-client",
@@ -565,8 +624,7 @@
     "softlayer >= 4.1.1",
     "psutil(python module)",
     "GlusterFS > 3.2",
-    "This module requires parted version 1.8.3 and above",
-    "align option (except 'undefined') requires parted 2.1 and above",
+    "This module requires parted version 1.8.3 and above.",
     "If the version of parted is below 3.1, it requires a Linux version running the sysfs file system C(/sys/).",
     "sendgrid python library",
     "ipwcli (installed on Ericsson IPWorks)",
@@ -599,7 +657,6 @@
     "opkg",
     "python",
     "update-alternatives",
-    "footmark >= 1.13.0",
     "pushbullet.py",
     "hponcfg tool",
     "rhnreg_ks",
@@ -781,11 +838,19 @@
     "requests",
     "VMware vSAN Python's SDK"
   ],
+  "servicenow.servicenow": [
+    "requests",
+    "netaddr",
+    "python pysnow (pysnow)"
+  ],
   "check_point.mgmt": [],
   "ovirt.ovirt": [
     "python >= 2.7",
-    "ovirt-engine-sdk-python >= 4.4.0",
+    "ovirt-engine-sdk-python >= 4.3.0",
     "ovirt-engine-sdk-python >= 4.2.4"
+  ],
+  "chocolatey.chocolatey": [
+    "chocolatey >= 0.10.5 (will be upgraded if older)"
   ],
   "openvswitch.openvswitch": [
     "ansible",
@@ -800,5 +865,6 @@
   "fortinet.fortimanager": [],
   "fortinet.fortios": [
     "fortiosapi>=0.9.8"
-  ]
+  ],
+  "wti.remote": []
 }
