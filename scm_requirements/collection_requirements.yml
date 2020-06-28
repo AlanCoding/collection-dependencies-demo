@@ -1,0 +1,16 @@
+collections:
+  # - name: git@github.com:my_org/private_collections.git#/path/to/collection,devel
+  - name: https://github.com/ansible-collections/amazon.aws.git
+    type: git
+    version: 8102847014fd6e7a3233df9ea998ef4677b99248
+
+  # Install a collection from Ansible Galaxy.
+  - name: geerlingguy.php_roles
+    version: 0.9.3
+    source: https://galaxy.ansible.com
+
+  # - name: https://github.com/alancoding/awx.git#awx_collection,in_place_everything
+  #   type: git
+
+  - name: file:///Users/alancoding/Documents/tower#awx_collection,in_place_everything
+    type: git

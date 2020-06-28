@@ -12,3 +12,4 @@ __pycache__/
 /cloner/requirements.sh
 /cloner/download/
 /role_compat/target/
+/scm_requirements/target/
