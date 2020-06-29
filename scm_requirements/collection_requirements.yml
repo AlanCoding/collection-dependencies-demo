@@ -2,7 +2,11 @@ collections:
   # - name: git@github.com:my_org/private_collections.git#/path/to/collection,devel
   - name: https://github.com/ansible-collections/amazon.aws.git
     type: git
-    version: 8102847014fd6e7a3233df9ea998ef4677b99248
+    # version: 8102847014fd6e7a3233df9ea998ef4677b99248  # April 1, 2020, super old
+    # this is the 0.1.2 tag, but galaxy.yml has wrong value of 0.1.1
+    # version: ccfe65b61d12df4c9850f1d5acad75bf8d34bc95
+    # commit for 1.0.0
+    version: 312ed517c74425083d6907293f214a47af1831ab
 
   # Install a collection from Ansible Galaxy.
   - name: geerlingguy.php_roles
