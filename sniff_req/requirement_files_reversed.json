@@ -1,0 +1,135 @@
+{
+  "requirements.txt": [
+    "frr.frr",
+    "arista.eos",
+    "google.cloud",
+    "ngine_io.cloudstack",
+    "cisco.iosxr",
+    "cisco.nxos",
+    "cisco.ios",
+    "cisco.asa",
+    "cisco.ucs",
+    "ibm.qradar",
+    "ansible.posix",
+    "ansible.netcommon",
+    "vyos.vyos",
+    "theforeman.foreman",
+    "splunk.es",
+    "skydive.skydive",
+    "junipernetworks.junos",
+    "community.vmware",
+    "openvswitch.openvswitch"
+  ],
+  "test-requirements.txt": [
+    "frr.frr",
+    "arista.eos",
+    "openstack.cloud",
+    "cisco.iosxr",
+    "cisco.nxos",
+    "cisco.ios",
+    "cisco.asa",
+    "ibm.qradar",
+    "ansible.posix",
+    "ansible.netcommon",
+    "vyos.vyos",
+    "splunk.es",
+    "skydive.skydive",
+    "junipernetworks.junos",
+    "community.vmware",
+    "openvswitch.openvswitch"
+  ],
+  "bindep.txt": [
+    "frr.frr",
+    "arista.eos",
+    "cisco.iosxr",
+    "cisco.nxos",
+    "cisco.ios",
+    "cisco.asa",
+    "ansible.netcommon",
+    "vyos.vyos",
+    "splunk.es",
+    "skydive.skydive",
+    "openvswitch.openvswitch"
+  ],
+  "tox.ini": [
+    "frr.frr",
+    "arista.eos",
+    "openstack.cloud",
+    "cisco.iosxr",
+    "cisco.nxos",
+    "cisco.ios",
+    "cisco.asa",
+    "ibm.qradar",
+    "ansible.netcommon",
+    "vyos.vyos",
+    "skydive.skydive",
+    "junipernetworks.junos",
+    "community.vmware",
+    "ovirt.ovirt",
+    "openvswitch.openvswitch"
+  ],
+  "CONTRIBUTING.rst": [
+    "openstack.cloud"
+  ],
+  "ci": [
+    "openstack.cloud",
+    "containers.podman"
+  ],
+  ".gitreview": [
+    "openstack.cloud"
+  ],
+  "setup.py": [
+    "openstack.cloud"
+  ],
+  "log_plugin.log": [
+    "azure.azcollection"
+  ],
+  "release-pipelines.yml": [
+    "azure.azcollection"
+  ],
+  "requirements-azure.txt": [
+    "azure.azcollection"
+  ],
+  "f5_modules_source": [
+    "f5networks.f5_modules"
+  ],
+  "flasharray_source": [
+    "purestorage.flasharray"
+  ],
+  "flashblade_source": [
+    "purestorage.flashblade"
+  ],
+  "requirements-common.txt": [
+    "theforeman.foreman"
+  ],
+  "requirements-dev.txt": [
+    "theforeman.foreman"
+  ],
+  "requirements-2.7.txt": [
+    "community.mongodb"
+  ],
+  "requirements-3.5.txt": [
+    "community.mongodb"
+  ],
+  "requirements-3.6.txt": [
+    "community.mongodb"
+  ],
+  "release.yml": [
+    "servicenow.servicenow"
+  ],
+  "config": [
+    "servicenow.servicenow"
+  ],
+  "galaxy.yml.j2": [
+    "servicenow.servicenow"
+  ],
+  "update_sets": [
+    "servicenow.servicenow"
+  ],
+  "chocolatey_source": [
+    "chocolatey.chocolatey"
+  ],
+  "remote_source": [
+    "wti.remote"
+  ]
+}

@@ -6,6 +6,7 @@ import subprocess
 
 from ansible.parsing.utils.yaml import from_yaml
 from ansible.parsing.yaml.dumper import AnsibleDumper
+from ansible import __version__
 
 import json
 from ansible.plugins import loader
@@ -61,6 +62,9 @@ for namespace in os.listdir(target_pythonpath):
     namespace_dir = os.path.join(target_pythonpath, namespace)
     local_reqs = []
     for name in os.listdir(namespace_dir):
+        if namespace == 'ansible' and name == 'base' and __version__.startswith('2.9'):
+            print('skipping ansible.base b/c not a thing in 2.9')
+            continue
         collection_dir = os.path.join(namespace_dir, name)
         top_content = os.listdir(collection_dir)
         for lightbulb in a_ha_collection:
@@ -193,8 +197,9 @@ for fqcn in collections.keys():
             req_files[fqcn].append(candidate)
 
 print()
-print('Candidate requirement files')
-print(json.dumps(req_files, indent=2))
+print('Writing Candidate requirement files')
+with open('sniff_req/requirement_files.json', 'w') as f:
+    json.dump(req_files, f, indent=2)
 
 
 reverse_reqs = {}
@@ -205,8 +210,10 @@ for k, v in req_files.items():
 
 
 print()
-print('Pivoted requirements file')
-print(json.dumps(reverse_reqs, indent=2))
+print('Writing Pivoted requirements file')
+with open('sniff_req/requirement_files_reversed.json', 'w') as f:
+    json.dump(reverse_reqs, f, indent=2)
+
 
 print()
 print('Total collections in set: {}'.format(len(collections)))
@@ -375,9 +382,10 @@ print(f'Inspected total of {plugin_ct} plugins')
 print()
 
 print('At last, what we were looking for')
-print('The unique requirements for each collection')
+print('Writing the unique requirements for each collection')
 print()
-print(json.dumps(collections, indent=2))
+with open('sniff_req/discovered.json', 'w') as f:
+    json.dump(collections, f, indent=2)
 
 print()
 print('The collections we could not assess because import failed')

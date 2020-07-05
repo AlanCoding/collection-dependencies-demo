@@ -1,0 +1,145 @@
+{
+  "frr.frr": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "arista.eos": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "openstack.cloud": [
+    "CONTRIBUTING.rst",
+    "test-requirements.txt",
+    "ci",
+    ".gitreview",
+    "setup.py",
+    "tox.ini"
+  ],
+  "azure.azcollection": [
+    "log_plugin.log",
+    "release-pipelines.yml",
+    "requirements-azure.txt"
+  ],
+  "f5networks.f5_modules": [
+    "f5_modules_source"
+  ],
+  "google.cloud": [
+    "requirements.txt"
+  ],
+  "ngine_io.cloudstack": [
+    "requirements.txt"
+  ],
+  "purestorage.flasharray": [
+    "flasharray_source"
+  ],
+  "purestorage.flashblade": [
+    "flashblade_source"
+  ],
+  "cisco.iosxr": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "cisco.nxos": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "cisco.ios": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "cisco.asa": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "cisco.ucs": [
+    "requirements.txt"
+  ],
+  "ibm.qradar": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "tox.ini"
+  ],
+  "ansible.posix": [
+    "requirements.txt",
+    "test-requirements.txt"
+  ],
+  "ansible.netcommon": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "vyos.vyos": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "theforeman.foreman": [
+    "requirements.txt",
+    "requirements-common.txt",
+    "requirements-dev.txt"
+  ],
+  "splunk.es": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt"
+  ],
+  "skydive.skydive": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "containers.podman": [
+    "ci"
+  ],
+  "junipernetworks.junos": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "tox.ini"
+  ],
+  "community.mongodb": [
+    "requirements-2.7.txt",
+    "requirements-3.5.txt",
+    "requirements-3.6.txt"
+  ],
+  "community.vmware": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "tox.ini"
+  ],
+  "servicenow.servicenow": [
+    "release.yml",
+    "config",
+    "galaxy.yml.j2",
+    "update_sets"
+  ],
+  "ovirt.ovirt": [
+    "tox.ini"
+  ],
+  "chocolatey.chocolatey": [
+    "chocolatey_source"
+  ],
+  "openvswitch.openvswitch": [
+    "requirements.txt",
+    "test-requirements.txt",
+    "bindep.txt",
+    "tox.ini"
+  ],
+  "wti.remote": [
+    "remote_source"
+  ]
+}

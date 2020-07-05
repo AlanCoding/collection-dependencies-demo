@@ -7,6 +7,18 @@ for the collections out in the wild.
 
 https://github.com/ansible/ansible-builder
 
+### Outputs
+
+The output is written to files with the intention of it being
+checked into source of this repo as a means of sharing universal
+facts about the collections inspected.
+
+Those files are:
+
+ - `discovered.json` - A listing of all requirement entries from DOCUMENTATION strings
+ - `requirement_files.json` - All requirement-like files for every collection
+ - `requirement_files_reversed.json` - Same listing but the collections for every type of file
+
 ### How to use
 
 You need a folder which has collections in it. This could be `~/.ansible/collections`.
@@ -18,7 +30,7 @@ Take that folder and throw it into the script.
 
 ```
 brew install libvirt  # only macos
-pip install boto3 botocore linode_api4 libvirt-python pymongo pynetbox msrest msrestazure pytz ucsmsdk python-memcached redis
+pip install boto3 botocore linode_api4 libvirt-python pymongo pynetbox msrest msrestazure pytz ucsmsdk python-memcached redis netaddr
 python sniff_req.py target
 ```
 
