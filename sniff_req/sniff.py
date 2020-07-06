@@ -265,7 +265,8 @@ for fqcn in collections.keys():
 
                 except Exception as e1:
                     excs.append(e1)
-                    print('   falling back python import because loader not available: {}'.format(str(e1)))
+                    if plugin_type != 'modules':
+                        print('   falling back python import because loader not available: {}'.format(str(e1)))
                     try:
                         m = importlib.import_module(fq_import)
                         if not hasattr(m, 'DOCUMENTATION'):
