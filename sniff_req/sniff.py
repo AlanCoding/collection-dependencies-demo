@@ -353,11 +353,10 @@ for fqcn in collections.keys():
     ee_spec_path = os.path.join(
         target_pythonpath, namespace, name, 'meta/execution-environment.yml'
     )
-    ee_tmp_dict['dependencies']['python'] = collections[fqcn]
+    ee_tmp_dict['dependencies']['python'] = 'requirements.txt'
     # assure meta directory exists
-    meta_dir = os.path.join(
-        target_pythonpath, namespace, name, 'meta'
-    )
+    collection_dir = os.path.join(target_pythonpath, namespace, name)
+    meta_dir = os.path.join(collection_dir, 'meta')
     if not os.path.exists(meta_dir):
         os.makedirs(meta_dir)
     if os.path.exists(ee_spec_path):
@@ -368,9 +367,11 @@ for fqcn in collections.keys():
         current_ee_dict = {'autogen': True}
     results = yaml.dump(ee_tmp_dict, Dumper=AnsibleDumper, default_flow_style=False)
     # only re-generate file if it has not been modified, use flag for this
-    if 'autogen' in current_ee_dict:
+    if 'autogen' in current_ee_dict and 'requirements.txt' not in os.listdir(collection_dir):
         with open(ee_spec_path, 'w') as f:
             f.write(results)
+        with open(os.path.join(collection_dir, 'requirement.txt'), 'w') as f:
+            f.write('\n'.join(collections[fqcn]))
 
 
 print()
