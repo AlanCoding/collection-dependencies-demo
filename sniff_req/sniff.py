@@ -268,6 +268,8 @@ for fqcn in collections.keys():
                 try:
                     if plugin_type == 'modules':
                         type_loader = loader.module_loader
+                    elif plugin_type == 'doc_fragments':
+                        type_loader = loader.fragment_loader
                     else:
                         type_loader = getattr(loader, f'{plugin_type}_loader', None)
                     assert type_loader is not None

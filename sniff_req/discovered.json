@@ -3,7 +3,6 @@
     "black==19.3b0",
     "mock",
     "pexpect",
-    "pytest-xdist",
     "coverage==4.5.4"
   ],
   "arista.eos": [
@@ -11,7 +10,6 @@
     "black==19.3b0 ; python_version > '3.5'",
     "mock",
     "pexpect",
-    "pytest-xdist",
     "coverage==4.5.4",
     "EOS v4.12 or greater"
   ],
@@ -161,7 +159,6 @@
     "black==19.3b0 ; python_version > '3.5'",
     "mock",
     "pexpect",
-    "pytest-xdist",
     "coverage==4.5.4",
     "ncclient >= 0.5.3 when using netconf",
     "lxml >= 4.1.1 when using netconf",
@@ -173,7 +170,6 @@
     "scp",
     "black==19.3b0 ; python_version > '3.5'",
     "pexpect",
-    "pytest-xdist",
     "coverage==4.5.4",
     "paramiko (required when file_pull is False)",
     "SCPClient (required when file_pull is False)",
@@ -190,7 +186,6 @@
     "black==19.3b0 ; python_version > '3.5'",
     "mock",
     "pexpect",
-    "pytest-xdist",
     "coverage==4.5.4"
   ],
   "cisco.meraki": [],
@@ -198,7 +193,6 @@
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
     "mock",
-    "pytest-xdist",
     "coverage==4.5.4"
   ],
   "cisco.ucs": [
@@ -208,7 +202,6 @@
   "ibm.qradar": [],
   "ansible.posix": [
     "coverage==4.5.4",
-    "pytest-xdist",
     "whitelisting in configuration",
     "set as main display callback",
     "whitelisting in configuration - see examples section below for details.",
@@ -226,7 +219,6 @@
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
     "coverage==4.5.4",
-    "pytest-xdist",
     "napalm",
     "scp",
     "ncclient (>=v0.5.2)"
@@ -272,7 +264,6 @@
     "black ; python_version > '3.5'",
     "mock",
     "pexpect",
-    "pytest-xdist",
     "coverage==4.5.4"
   ],
   "theforeman.foreman": [
@@ -280,9 +271,6 @@
     "-r requirements-common.txt",
     "ansible>=2.3",
     "ipaddress; python_version < '3.3'",
-    "PyYAML",
-    "pytest",
-    "pytest-xdist",
     "vcrpy",
     "ansible_runner",
     "python-debian",
@@ -315,7 +303,6 @@
     "xmltodict",
     "black==19.3b0 ; python_version > '3.5'",
     "mock",
-    "pytest-xdist",
     "coverage==4.5.4",
     "ncclient (>=v0.6.4)",
     "ncclient (>=v0.5.2)",
@@ -550,7 +537,6 @@
     "gunicorn",
     "A ZFS/OpenZFS implementation that supports delegation with `zfs allow`, including: Solaris >= 10, illumos (all versions), FreeBSD >= 8.0R, ZFS on Linux >= 0.7.0.",
     "proxmoxer",
-    "PyYAML",
     "kmod-kvdo",
     "vdo",
     "hpOneView >= 3.1.0",
@@ -791,7 +777,6 @@
   "openvswitch.openvswitch": [
     "black==19.3b0 ; python_version > '3.5'",
     "coverage==4.5.4",
-    "pytest-xdist",
     "ovs-vsctl",
     "ovs-vsctl >= 2.3.3"
   ],
