@@ -58,6 +58,24 @@ collections = {}
 failed = {}
 
 
+EXCLUDE_REQUIREMENTS = (
+    'ansible',
+    'ansible-base',
+    'yaml', 'PyYAML',
+    'six.moves.StringIO', 'sys',
+    '',
+    'tox', 'pycodestyle', 'yamllint', 'voluptuous', 'pylint',
+    'flake8', 'pytest', 'pytest-xdist', 'coverage',
+    'requests'
+)
+
+
+def exclude_req(req):
+    if req in EXCLUDE_REQUIREMENTS:
+        return True
+    return False
+
+
 for namespace in os.listdir(target_pythonpath):
     namespace_dir = os.path.join(target_pythonpath, namespace)
     local_reqs = []
@@ -86,7 +104,7 @@ for fqcn in collections.keys():
                 req_text = f.read()
             req_text = req_text.strip()
             for line in req_text.split('\n'):
-                if req_text not in collections[fqcn]:
+                if not exclude_req(line) and line not in collections[fqcn]:
                     collections[fqcn].append(line)
 
 
@@ -117,6 +135,10 @@ error_exceptions = ()
 #     # google/cloud/plugins/modules/gcp_compute_target_https_proxy_info.py
 #     "No module named 'ansible.module_utils.gcp_utils'"
 # )
+# plugins that cannot be loaded as YAML due to a bug
+yaml_exceptions = (
+    'ansible_collections.google.cloud.plugins.modules.gcp_pubsub_subscription',
+)
 plugin_ct = 0
 
 
@@ -244,7 +266,10 @@ for fqcn in collections.keys():
             try:
                 excs = []
                 try:
-                    type_loader = getattr(loader, f'{plugin_type}_loader', None)
+                    if plugin_type == 'modules':
+                        type_loader = loader.module_loader
+                    else:
+                        type_loader = getattr(loader, f'{plugin_type}_loader', None)
                     assert type_loader is not None
                     m = type_loader._load_module_source(
                         f'{namespace}.{name}.{plugin}',
@@ -309,6 +334,10 @@ for fqcn in collections.keys():
                 has_req = False
                 if has_doc:
                     try:
+                        if fq_import in yaml_exceptions:
+                            failed.setdefault(fqcn, [])
+                            failed[fqcn].append(f'plugin {fq_import} has known YAML parse bug')
+                            continue
                         doc_dict = from_yaml(doc)
                         # doc_dict = yaml.safe_load(doc)
                         if 'requirements' not in doc_dict and len(doc_dict) == 1:
@@ -322,7 +351,7 @@ for fqcn in collections.keys():
                             for req in reqs:
                                 if not isinstance(req, str):
                                     raise Exception('Entry in requirements not string')
-                                if req not in collections[fqcn]:
+                                if not exclude_req(req) and req not in collections[fqcn]:
                                     collections[fqcn].append(req)
                     except Exception:
                         print()
@@ -370,7 +399,7 @@ for fqcn in collections.keys():
     if 'autogen' in current_ee_dict and 'requirements.txt' not in os.listdir(collection_dir):
         with open(ee_spec_path, 'w') as f:
             f.write(results)
-        with open(os.path.join(collection_dir, 'requirement.txt'), 'w') as f:
+        with open(os.path.join(collection_dir, 'requirements.txt'), 'w') as f:
             f.write('\n'.join(collections[fqcn]))
 
 

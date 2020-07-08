@@ -1,39 +1,25 @@
 {
   "frr.frr": [
-    "ansible",
     "black==19.3b0",
-    "flake8",
     "mock",
     "pexpect",
     "pytest-xdist",
-    "yamllint",
     "coverage==4.5.4"
   ],
   "arista.eos": [
-    "ansible",
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "flake8",
     "mock",
     "pexpect",
     "pytest-xdist",
-    "yamllint",
     "coverage==4.5.4",
     "EOS v4.12 or greater"
   ],
   "openstack.cloud": [
-    "ansible",
-    "ansible-base",
     "openstacksdk",
-    "pycodestyle",
-    "flake8",
-    "pylint",
-    "voluptuous",
-    "yamllint",
     "rstcheck",
     "ruamel.yaml",
     "galaxy-importer",
-    "tox",
     "python >= 3.6",
     "openstacksdk >= 0.12.0",
     "openstacksdk >= 0.28",
@@ -121,7 +107,6 @@
   ],
   "dellemc_networking.os10": [],
   "f5networks.f5_modules": [
-    "requests",
     "Requires BIG-IP >= 12.1.0",
     "The 'rpm' tool installed on the Ansible controller",
     "BIG-IQ >= 5.3.0",
@@ -130,7 +115,6 @@
     "BIG-IP >= v13.0.0"
   ],
   "google.cloud": [
-    "requests",
     "google-auth",
     "requests >= 2.18.4",
     "google-auth >= 1.3.0",
@@ -143,8 +127,7 @@
   "ngine_io.cloudstack": [
     "cs>=0.9.0",
     "python >= 2.6",
-    "cs >= 0.9.0",
-    "yaml"
+    "cs >= 0.9.0"
   ],
   "ngine_io.vultr": [
     "python >= 2.6"
@@ -153,8 +136,6 @@
     "pytz",
     "python.dateutil >= 2.7.0",
     "ansible-tower-cli >= 3.3.0",
-    "six.moves.StringIO",
-    "sys",
     "ansible-tower-cli >= 3.0.2",
     "pyyaml"
   ],
@@ -174,16 +155,13 @@
     "Multi Site Orchestrator v2.1 or newer"
   ],
   "cisco.iosxr": [
-    "ansible",
     "lxml",
     "ncclient",
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "flake8",
     "mock",
     "pexpect",
     "pytest-xdist",
-    "yamllint",
     "coverage==4.5.4",
     "ncclient >= 0.5.3 when using netconf",
     "lxml >= 4.1.1 when using netconf",
@@ -191,13 +169,10 @@
     "paramiko when using I(public_key_contents) or I(public_key)"
   ],
   "cisco.nxos": [
-    "ansible",
     "paramiko",
     "scp",
     "black==19.3b0 ; python_version > '3.5'",
-    "flake8",
     "pexpect",
-    "yamllint",
     "pytest-xdist",
     "coverage==4.5.4",
     "paramiko (required when file_pull is False)",
@@ -211,22 +186,17 @@
     "python-dateutil"
   ],
   "cisco.ios": [
-    "ansible",
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "flake8",
     "mock",
     "pexpect",
     "pytest-xdist",
-    "yamllint",
     "coverage==4.5.4"
   ],
   "cisco.meraki": [],
   "cisco.asa": [
-    "ansible",
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "flake8",
     "mock",
     "pytest-xdist",
     "coverage==4.5.4"
@@ -235,12 +205,8 @@
     "ucsmsdk"
   ],
   "cloudscale_ch.cloud": [],
-  "ibm.qradar": [
-    "ansible",
-    ""
-  ],
+  "ibm.qradar": [],
   "ansible.posix": [
-    "",
     "coverage==4.5.4",
     "pytest-xdist",
     "whitelisting in configuration",
@@ -255,15 +221,12 @@
     "libsemanage-python"
   ],
   "ansible.netcommon": [
-    "ansible",
     "jxmlease",
     "ncclient",
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
     "coverage==4.5.4",
-    "flake8",
     "pytest-xdist",
-    "yamllint",
     "napalm",
     "scp",
     "ncclient (>=v0.5.2)"
@@ -305,24 +268,19 @@
     "hostname"
   ],
   "vyos.vyos": [
-    "ansible",
     "paramiko",
     "black ; python_version > '3.5'",
-    "flake8",
     "mock",
     "pexpect",
     "pytest-xdist",
-    "yamllint",
     "coverage==4.5.4"
   ],
   "theforeman.foreman": [
     "apypie>=0.0.5",
     "-r requirements-common.txt",
     "ansible>=2.3",
-    "requests",
     "ipaddress; python_version < '3.3'",
     "PyYAML",
-    "flake8",
     "pytest",
     "pytest-xdist",
     "vcrpy",
@@ -331,7 +289,6 @@
     "rpm-py-installer",
     "docker",
     "git+https://github.com/Apipie/apypie.git@master#egg=apypie",
-    "-r requirements-common.txt",
     "-r https://github.com/ansible/ansible/raw/devel/test/lib/ansible_test/_data/requirements/sanity.pylint.txt",
     "-r https://github.com/ansible/ansible/raw/devel/test/lib/ansible_test/_data/requirements/sanity.validate-modules.txt",
     "apypie",
@@ -342,30 +299,23 @@
     "python-debian (For deb Package upload)",
     "rpm (For rpm upload)"
   ],
-  "splunk.es": [
-    ""
-  ],
+  "splunk.es": [],
   "skydive.skydive": [
-    "ansible",
     "black==19.3b0",
-    "flake8",
     "skydive-client"
   ],
   "containers.podman": [
     "Podman installed on host"
   ],
   "junipernetworks.junos": [
-    "ansible",
     "jxmlease",
     "ncclient",
     "paramiko",
     "scp",
     "xmltodict",
     "black==19.3b0 ; python_version > '3.5'",
-    "flake8",
     "mock",
     "pytest-xdist",
-    "yamllint",
     "coverage==4.5.4",
     "ncclient (>=v0.6.4)",
     "ncclient (>=v0.5.2)",
@@ -460,7 +410,6 @@
     "Create a HTTP Event Collector in Splunk",
     "Define the url and token in ansible.cfg",
     "serverless",
-    "yaml",
     "influxdb >= 0.9",
     "cron",
     "profitbricks",
@@ -565,7 +514,6 @@
     "ip",
     "python-consul",
     "pyhcl",
-    "requests",
     "subscription-manager",
     "python >= 2.5",
     "json",
@@ -665,7 +613,13 @@
     "grpcio",
     "apache-libcloud >= 0.17.0",
     "ejabberd with mod_admin_extra",
-    "L(Docker SDK for Python,https://docker-py.readthedocs.io/en/stable/) >= 2.0.0"
+    "L(Docker SDK for Python,https://docker-py.readthedocs.io/en/stable/) >= 2.0.0",
+    "python >= 3.6",
+    "footmark >= 1.19.0",
+    "netstat",
+    "This module requires parted version 1.8.3 and above",
+    "align option (except 'undefined') requires parted 2.1 and above",
+    "footmark >= 1.13.0"
   ],
   "community.network": [
     "ingatesdk >= 1.0.6",
@@ -684,7 +638,6 @@
     "paramiko",
     "python >= 3.5",
     "firepower-kickstart",
-    "requests",
     "requests_toolbelt",
     "cps",
     "cps_object",
@@ -720,21 +673,7 @@
     "python-vagrant==0.5.15",
     "# sh 1.13.1 causes molecule yamllint to fail.",
     "sh<1.13",
-    "ansible==2.9.4",
-    "ansible-lint==4.2.0",
-    "docker==4.1.0",
-    "flake8==3.7.9",
-    "molecule==2.22",
     "pytest==5.3.4",
-    "python-vagrant==0.5.15",
-    "sh==1.13.1",
-    "ansible==2.9.4",
-    "ansible-lint==4.2.0",
-    "docker==4.1.0",
-    "flake8==3.7.9",
-    "molecule==2.22",
-    "pytest==5.3.4",
-    "python-vagrant==0.5.15",
     "sh==1.13.1",
     "pymongo>=3",
     "pymongo >= 2.4 (python library)",
@@ -807,13 +746,11 @@
     "openshift == 0.4.3",
     "openshift >= 0.6.2",
     "urllib3",
-    "requests",
     "requests-oauthlib"
   ],
   "community.vmware": [
     "pyvmomi",
     "git+https://github.com/vmware/vsphere-automation-sdk-python.git ; python_version >= '2.7'  # Python 2.6 is not supported",
-    "flake8",
     "selinux",
     "pyvmomi (Python library)",
     "requests (Python library)",
@@ -835,11 +772,9 @@
     "ssl",
     "socket",
     "hashlib",
-    "requests",
     "VMware vSAN Python's SDK"
   ],
   "servicenow.servicenow": [
-    "requests",
     "netaddr",
     "python pysnow (pysnow)"
   ],
@@ -847,18 +782,16 @@
   "ovirt.ovirt": [
     "python >= 2.7",
     "ovirt-engine-sdk-python >= 4.3.0",
-    "ovirt-engine-sdk-python >= 4.2.4"
+    "ovirt-engine-sdk-python >= 4.2.4",
+    "ovirt-engine-sdk-python >= 4.4.0"
   ],
   "chocolatey.chocolatey": [
     "chocolatey >= 0.10.5 (will be upgraded if older)"
   ],
   "openvswitch.openvswitch": [
-    "ansible",
     "black==19.3b0 ; python_version > '3.5'",
     "coverage==4.5.4",
-    "flake8",
     "pytest-xdist",
-    "yamllint",
     "ovs-vsctl",
     "ovs-vsctl >= 2.3.3"
   ],

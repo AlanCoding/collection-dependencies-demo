@@ -271,3 +271,12 @@ up running imports via the methods:
 
 Because of the isolation fallback, this causes the script to take a
 very long time with all the ACD collections, on the order of 15 minutes.
+
+Note that these counts changed as I effectively found out where to
+get the correct module loader. That changed the counts:
+
+ - Ansible actual collection loader 3940
+ - Direct python import 325
+ - Import in subprocess to obtain isolation 198
+
+this also dropped the time down to 1 min and 16 seconds.
