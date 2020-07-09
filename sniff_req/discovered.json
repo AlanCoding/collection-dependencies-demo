@@ -1,14 +1,12 @@
 {
   "frr.frr": [
     "black==19.3b0",
-    "pexpect",
-    "coverage==4.5.4"
+    "pexpect"
   ],
   "arista.eos": [
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
     "pexpect",
-    "coverage==4.5.4",
     "EOS v4.12 or greater"
   ],
   "openstack.cloud": [
@@ -16,7 +14,6 @@
     "rstcheck",
     "ruamel.yaml",
     "galaxy-importer",
-    "python >= 3.6",
     "openstacksdk >= 0.12.0",
     "openstacksdk >= 0.28",
     "openstacksdk >= 0.44",
@@ -47,7 +44,6 @@
     "See respective platform section for more details"
   ],
   "amazon.aws": [
-    "python >= 2.6",
     "boto",
     "boto3",
     "botocore",
@@ -98,7 +94,6 @@
     "azure-mgmt-loganalytics==0.2.0",
     "azure-mgmt-automation==0.1.1",
     "azure-mgmt-iothub==0.7.0",
-    "python >= 2.7",
     "azure >= 2.0.0"
   ],
   "dellemc_networking.os10": [],
@@ -112,22 +107,15 @@
   ],
   "google.cloud": [
     "google-auth",
-    "requests >= 2.18.4",
     "google-auth >= 1.3.0",
-    "python >= 2.6",
     "google-cloud-storage >= 1.2..0"
   ],
-  "ngine_io.exoscale": [
-    "python >= 2.6"
-  ],
+  "ngine_io.exoscale": [],
   "ngine_io.cloudstack": [
     "cs>=0.9.0",
-    "python >= 2.6",
     "cs >= 0.9.0"
   ],
-  "ngine_io.vultr": [
-    "python >= 2.6"
-  ],
+  "ngine_io.vultr": [],
   "awx.awx": [
     "pytz",
     "python.dateutil >= 2.7.0",
@@ -136,12 +124,10 @@
     "pyyaml"
   ],
   "purestorage.flasharray": [
-    "python >= 2.7",
     "purestorage >= 1.16",
     "netaddr"
   ],
   "purestorage.flashblade": [
-    "python >= 2.7",
     "purity_fb >= 1.9",
     "netaddr",
     "pytz"
@@ -156,7 +142,6 @@
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
     "pexpect",
-    "coverage==4.5.4",
     "ncclient >= 0.5.3 when using netconf",
     "lxml >= 4.1.1 when using netconf",
     "base64 when using I(public_key_contents) or I(public_key)",
@@ -167,7 +152,6 @@
     "scp",
     "black==19.3b0 ; python_version > '3.5'",
     "pexpect",
-    "coverage==4.5.4",
     "paramiko (required when file_pull is False)",
     "SCPClient (required when file_pull is False)",
     "pexpect (required when file_pull is True)"
@@ -181,14 +165,12 @@
   "cisco.ios": [
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "pexpect",
-    "coverage==4.5.4"
+    "pexpect"
   ],
   "cisco.meraki": [],
   "cisco.asa": [
     "paramiko",
-    "black==19.3b0 ; python_version > '3.5'",
-    "coverage==4.5.4"
+    "black==19.3b0 ; python_version > '3.5'"
   ],
   "cisco.ucs": [
     "ucsmsdk"
@@ -196,7 +178,6 @@
   "cloudscale_ch.cloud": [],
   "ibm.qradar": [],
   "ansible.posix": [
-    "coverage==4.5.4",
     "whitelisting in configuration",
     "set as main display callback",
     "whitelisting in configuration - see examples section below for details.",
@@ -213,7 +194,6 @@
     "ncclient",
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "coverage==4.5.4",
     "napalm",
     "scp",
     "ncclient (>=v0.5.2)"
@@ -228,7 +208,6 @@
     "pywinrm (python library)",
     "junit_xml (python lib)",
     "Whatever is required for the package plugins specific for each system.",
-    "python >= 2.6",
     "pexpect >= 3.3",
     "git>=1.7.1 (the command line tool)",
     "python-apt (python 2)",
@@ -257,13 +236,11 @@
   "vyos.vyos": [
     "paramiko",
     "black ; python_version > '3.5'",
-    "pexpect",
-    "coverage==4.5.4"
+    "pexpect"
   ],
   "theforeman.foreman": [
     "apypie>=0.0.5",
     "-r requirements-common.txt",
-    "ansible>=2.3",
     "ipaddress; python_version < '3.3'",
     "vcrpy",
     "ansible_runner",
@@ -274,7 +251,6 @@
     "-r https://github.com/ansible/ansible/raw/devel/test/lib/ansible_test/_data/requirements/sanity.pylint.txt",
     "-r https://github.com/ansible/ansible/raw/devel/test/lib/ansible_test/_data/requirements/sanity.validate-modules.txt",
     "apypie",
-    "requests >= 1.1",
     "whitelisting in configuration",
     "requests (python library)",
     "ipaddress",
@@ -296,7 +272,6 @@
     "scp",
     "xmltodict",
     "black==19.3b0 ; python_version > '3.5'",
-    "coverage==4.5.4",
     "ncclient (>=v0.6.4)",
     "ncclient (>=v0.5.2)",
     "xmltodict (>=0.12.0)",
@@ -308,15 +283,12 @@
     "memcache (python lib)",
     "redis>=2.4.5 (python lib)",
     "oc (go binary)",
-    "python >= 2.7",
     "infinisdk",
-    "python >= 2.7.9",
     "pylxca",
     "pyxcli",
     "purity_fb >= 1.1",
     "hpe3par_sdk >= 1.0.2. Install using 'pip install hpe3par_sdk'",
     "WSAPI service should be enabled on the 3PAR storage array.",
-    "Python >= 2.7",
     "Docker SDK for Python: Please note that the L(docker-py,https://pypi.org/project/docker-py/) Python module has been superseded by L(docker,https://pypi.org/project/docker/) (see L(here,https://github.com/docker/docker-py/issues/1310) for details). This module does *not* work with docker-py.",
     "openshift >= 0.8.2",
     "An EMC VNX Storage device.",
@@ -329,7 +301,6 @@
     "VEXATA_USER and VEXATA_PASSWORD environment variables must be set if user and password arguments are not passed to the module directly.",
     "psycopg2",
     "Python SDK for Oracle Cloud Infrastructure U(https://oracle-cloud-infrastructure-python-sdk.readthedocs.io)",
-    "python >= 2.6",
     "pyrax",
     "manageiq-client U(https://github.com/ManageIQ/manageiq-api-client-python/)",
     "ovirt-engine-sdk-python >= 4.3.0",
@@ -354,13 +325,11 @@
     "redis (python library https://github.com/andymccurdy/redis-py/)",
     "keyring (python library)",
     "The controlling host running Ansible has a Conjur identity. (More: U(https://docs.conjur.org/Latest/en/Content/Get%20Started/key_concepts/machine_identity.html))",
-    "requests >= 2.18.4",
     "google-auth >= 1.3.0",
     "credstash (python library)",
     "hiera (command line utility)",
     "python-consul python library U(https://python-consul.readthedocs.io/en/latest/#installation)",
     "openshift >= 0.6",
-    "PyYAML >= 3.11",
     "linode_api4 >= 2.0.0",
     "nmap CLI installed",
     "L(Docker Machine,https://docs.docker.com/machine/)",
@@ -403,11 +372,9 @@
     "google-auth-httplib2 >= 0.0.2",
     "ovirtsdk",
     "lxc >= 1.0 # OS package",
-    "python >= 2.6 # OS Package",
     "lxc-python2 >= 0.1 # PIP Package from https://github.com/lxc/python2-lxc",
     "unixODBC",
     "pyodbc",
-    "Python >= 2.6",
     "packet-python >= 1.35",
     "etcd3",
     "nailgun >= 0.28.0",
@@ -433,7 +400,6 @@
     "Docker API >= 1.21",
     "requests (either >= 2.0.0 for Python 3, or >= 1.0.0 for Python 2)",
     "python = 2.7",
-    "requests >= 2.5.0",
     "clc-sdk",
     "virtualenv",
     "1and1",
@@ -467,7 +433,6 @@
     "ohai",
     "layman python module",
     "gentoolkit",
-    "python >= 2.7.5",
     "lxml",
     "boto if using a S3 repository (s3://...)",
     "say or espeak or espeak-ng",
@@ -495,7 +460,6 @@
     "python-consul",
     "pyhcl",
     "subscription-manager",
-    "python >= 2.5",
     "json",
     "firewalld >= 0.2.11",
     "a2enmod",
@@ -542,7 +506,6 @@
     "openssl",
     "keytool",
     "Valid Uptime Robot API Key",
-    "requests >= 2.0.0",
     "dopy",
     "puppet",
     "Slackware >= 12.2",
@@ -582,7 +545,6 @@
     "ovh >=  0.4.8",
     "pymssql",
     "opkg",
-    "python",
     "update-alternatives",
     "pushbullet.py",
     "hponcfg tool",
@@ -593,7 +555,6 @@
     "apache-libcloud >= 0.17.0",
     "ejabberd with mod_admin_extra",
     "L(Docker SDK for Python,https://docker-py.readthedocs.io/en/stable/) >= 2.0.0",
-    "python >= 3.6",
     "footmark >= 1.19.0",
     "netstat",
     "This module requires parted version 1.8.3 and above",
@@ -615,7 +576,6 @@
     "Cisco NSO version 3.4.12 or higher, 4.2.7 or higher, 4.3.8 or higher, 4.4.3 or higher, 4.5 or higher.",
     "vdirect-client >= 4.9.0-post4",
     "paramiko",
-    "python >= 3.5",
     "firepower-kickstart",
     "requests_toolbelt",
     "cps",
@@ -633,26 +593,20 @@
   ],
   "community.rabbitmq": [
     "The python pika package U(https://pypi.org/project/pika/).",
-    "requests >= 1.0.0",
     "pika"
   ],
   "community.libvirt": [
     "libvirt-python",
-    "python >= 2.6",
     "python-libvirt",
     "python-lxml"
   ],
   "community.mongodb": [
-    "ansible==2.9.4",
     "ansible-lint==4.2.0",
     "docker==4.1.0",
-    "flake8==3.7.9",
     "molecule==2.22",
-    "pytest==4.6.9",
     "python-vagrant==0.5.15",
     "# sh 1.13.1 causes molecule yamllint to fail.",
     "sh<1.13",
-    "pytest==5.3.4",
     "sh==1.13.1",
     "pymongo>=3",
     "pymongo >= 2.4 (python library)",
@@ -665,14 +619,12 @@
     "boto3",
     "botocore",
     "boto3 >= 1.0.0",
-    "python >= 2.6",
     "json",
     "boto",
     "boto3 >= 1.4.4",
     "boto3>=1.4.4",
     "boto >= 2.37.0",
     "boto3 >= 1.4.4 (for tagging)",
-    "python >= 2.7",
     "boto3 >= 1.5.0",
     "boto3 >= 1.11.15",
     "boto3>=1.6",
@@ -706,9 +658,7 @@
     "smbprotocol[kerberos] for optional Kerberos authentication"
   ],
   "community.zabbix": [
-    "python >= 2.6",
     "zabbix-api >= 0.5.4",
-    "python >= 2.7",
     "zabbix-api >= 0.5.3",
     "pydotplus",
     "webcolors",
@@ -717,9 +667,7 @@
   ],
   "community.kubernetes": [
     "kubectl (go binary)",
-    "python >= 2.7",
     "openshift >= 0.6",
-    "PyYAML >= 3.11",
     "helm (https://github.com/helm/helm/releases)",
     "yaml (https://pypi.org/project/PyYAML/)",
     "openshift == 0.4.3",
@@ -733,20 +681,15 @@
     "selinux",
     "pyvmomi (Python library)",
     "requests (Python library)",
-    "Python >= 2.7",
     "PyVmomi",
-    "requests >= 2.3",
     "vSphere Automation SDK - For tag feature",
     "vCloud Suite SDK - For tag feature",
-    "python >= 2.6",
     "vSphere Automation SDK",
     "Tested on ESXi 5.5 and 6.5.",
     "PyVmomi installed.",
-    "python >= 2.7",
     "Tested on vSphere 5.5 and 6.5",
     "PyVmomi installed",
     "pyVmomi",
-    "python > =  2.6",
     "pyvcloud <= 18.2.2",
     "ssl",
     "socket",
@@ -759,7 +702,6 @@
   ],
   "check_point.mgmt": [],
   "ovirt.ovirt": [
-    "python >= 2.7",
     "ovirt-engine-sdk-python >= 4.3.0",
     "ovirt-engine-sdk-python >= 4.2.4",
     "ovirt-engine-sdk-python >= 4.4.0"
@@ -769,7 +711,6 @@
   ],
   "openvswitch.openvswitch": [
     "black==19.3b0 ; python_version > '3.5'",
-    "coverage==4.5.4",
     "ovs-vsctl",
     "ovs-vsctl >= 2.3.3"
   ],

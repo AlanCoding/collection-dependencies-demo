@@ -61,6 +61,7 @@ failed = {}
 EXCLUDE_REQUIREMENTS = (
     'ansible',
     'ansible-base',
+    'python', 'Python',
     'yaml', 'PyYAML',
     'six.moves.StringIO', 'sys',
     '',
@@ -71,7 +72,12 @@ EXCLUDE_REQUIREMENTS = (
 
 
 def exclude_req(req):
-    if req in EXCLUDE_REQUIREMENTS:
+    pkg = req
+    for sep in ('==', '>=', '>', '<', '<='):
+        if sep in req:
+            pkg = req.split(sep, 1)[0].strip()
+            break
+    if pkg in EXCLUDE_REQUIREMENTS:
         return True
     return False
 
