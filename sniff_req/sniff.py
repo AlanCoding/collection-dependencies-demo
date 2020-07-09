@@ -65,7 +65,7 @@ EXCLUDE_REQUIREMENTS = (
     'six.moves.StringIO', 'sys',
     '',
     'tox', 'pycodestyle', 'yamllint', 'voluptuous', 'pylint',
-    'flake8', 'pytest', 'pytest-xdist', 'coverage',
+    'flake8', 'pytest', 'pytest-xdist', 'coverage', 'mock',
     'requests'
 )
 

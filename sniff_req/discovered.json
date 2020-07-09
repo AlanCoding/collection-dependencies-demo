@@ -1,14 +1,12 @@
 {
   "frr.frr": [
     "black==19.3b0",
-    "mock",
     "pexpect",
     "coverage==4.5.4"
   ],
   "arista.eos": [
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "mock",
     "pexpect",
     "coverage==4.5.4",
     "EOS v4.12 or greater"
@@ -157,7 +155,6 @@
     "ncclient",
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "mock",
     "pexpect",
     "coverage==4.5.4",
     "ncclient >= 0.5.3 when using netconf",
@@ -184,7 +181,6 @@
   "cisco.ios": [
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "mock",
     "pexpect",
     "coverage==4.5.4"
   ],
@@ -192,7 +188,6 @@
   "cisco.asa": [
     "paramiko",
     "black==19.3b0 ; python_version > '3.5'",
-    "mock",
     "coverage==4.5.4"
   ],
   "cisco.ucs": [
@@ -262,7 +257,6 @@
   "vyos.vyos": [
     "paramiko",
     "black ; python_version > '3.5'",
-    "mock",
     "pexpect",
     "coverage==4.5.4"
   ],
@@ -302,7 +296,6 @@
     "scp",
     "xmltodict",
     "black==19.3b0 ; python_version > '3.5'",
-    "mock",
     "coverage==4.5.4",
     "ncclient (>=v0.6.4)",
     "ncclient (>=v0.5.2)",
