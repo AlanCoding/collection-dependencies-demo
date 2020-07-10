@@ -46,7 +46,7 @@ print(ee_tmp_str)
 
 ee_tmp_dict = from_yaml(ee_tmp_str)
 ee_tmp_dict['dependencies']['python'] = []
-ee_tmp_dict['dependencies']['system'] = []
+# ee_tmp_dict['dependencies']['system'] = []
 ee_tmp_dict['autogen'] = True
 
 print('dumped')
