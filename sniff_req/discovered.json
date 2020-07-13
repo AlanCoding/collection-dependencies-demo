@@ -10,6 +10,9 @@
     "EOS v4.12 or greater"
   ],
   "openstack.cloud": [
+    "openstacksdk>=0.44",
+    "keystoneauth1>=3.4.0",
+    "jsonpatch",
     "openstacksdk",
     "rstcheck",
     "ruamel.yaml",
@@ -18,8 +21,7 @@
     "openstacksdk >= 0.28",
     "openstacksdk >= 0.44",
     "openstacksdk >= 0.13.0",
-    "keystoneauth1 >= 3.4.0",
-    "jsonpatch"
+    "keystoneauth1 >= 3.4.0"
   ],
   "netbox.netbox": [
     "pynetbox"
@@ -45,10 +47,11 @@
   ],
   "amazon.aws": [
     "boto",
+    "botocore>=1.10.0",
+    "boto3>=1.0.0",
     "boto3",
     "botocore",
     "must have public internet connectivity",
-    "botocore>=1.10.0",
     "whitelisting in configuration - see examples section below for details.",
     "botocore>=1.5.45",
     "boto3 >= 1.0.0"
@@ -74,6 +77,7 @@
     "azure-mgmt-monitor==0.5.2",
     "azure-mgmt-network==10.2.0",
     "azure-mgmt-nspkg==2.0.0",
+    "azure-mgmt-privatedns==0.1.0",
     "azure-mgmt-redis==5.0.0",
     "azure-mgmt-resource==2.1.0",
     "azure-mgmt-rdbms==1.4.1",
@@ -87,7 +91,7 @@
     "msrest==0.6.10",
     "msrestazure==0.6.2",
     "azure-keyvault==1.0.0a1",
-    "azure-graphrbac==0.40.0",
+    "azure-graphrbac==0.61.1",
     "azure-mgmt-cosmosdb==0.5.2",
     "azure-mgmt-hdinsight==0.1.0",
     "azure-mgmt-devtestlabs==3.0.0",
@@ -666,14 +670,15 @@
     "Graphviz"
   ],
   "community.kubernetes": [
+    "openshift>=0.6.2",
+    "requests-oauthlib",
     "kubectl (go binary)",
     "openshift >= 0.6",
     "helm (https://github.com/helm/helm/releases)",
     "yaml (https://pypi.org/project/PyYAML/)",
     "openshift == 0.4.3",
     "openshift >= 0.6.2",
-    "urllib3",
-    "requests-oauthlib"
+    "urllib3"
   ],
   "community.vmware": [
     "pyvmomi",
@@ -702,9 +707,9 @@
   ],
   "check_point.mgmt": [],
   "ovirt.ovirt": [
-    "ovirt-engine-sdk-python >= 4.3.0",
-    "ovirt-engine-sdk-python >= 4.2.4",
-    "ovirt-engine-sdk-python >= 4.4.0"
+    "ovirt-engine-sdk-python>=4.4.0",
+    "ovirt-engine-sdk-python >= 4.4.0",
+    "ovirt-engine-sdk-python >= 4.2.4"
   ],
   "chocolatey.chocolatey": [
     "chocolatey >= 0.10.5 (will be upgraded if older)"
