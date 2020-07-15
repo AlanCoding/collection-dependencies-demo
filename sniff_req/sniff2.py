@@ -1,20 +1,11 @@
 import sys
 import os
-import re
-import yaml
 import json
 import ast
 
 from ansible.parsing.plugin_docs import read_docstring
 from ansible.parsing.yaml.loader import AnsibleLoader
 from ansible import __version__
-
-
-p = re.compile(
-    r'''DOCUMENTATION = r?(?P<quote>{}|{})(?P<doc>.+?)(?P=quote)'''.format(
-        "'''", '"""'
-    ), re.DOTALL
-)
 
 
 line_ct = 0
@@ -28,7 +19,6 @@ excludes = (
     # ansible-doc google.cloud.gcp_pubsub_subscription
     'google/cloud/plugins/modules/gcp_pubsub_subscription.py'
 )
-exclude_yaml = ()
 validated_paths = set()
 req_data = {}
 
@@ -73,6 +63,9 @@ def ast_fragment_parse(path):
         assert isinstance(thedef, ast.Assign), thedef
         assert len(thedef.targets) == 1
         key = thedef.targets[0].id
+        # TODO: okay, yes, it is pointless to list these up,
+        # I will give up the goal of validation of the doc_fragment sub-keys...
+        # but not today
         assert key in (
             'DOCUMENTATION',
             'ONTAP',  # deprecated
@@ -97,27 +90,6 @@ def ast_fragment_parse(path):
         data = AnsibleLoader(thedef.value.s, file_name=path).get_single_data()
         fragments[key] = data
     return fragments
-
-
-def parse_file(path):
-    with open(path, 'r') as f:
-        m = p.search(f.read())
-    assert m, path
-    doc_string = m.group('doc')
-    assert doc_string, path
-    doc_string = doc_string.strip('\n')
-    try:
-        data = yaml.safe_load(doc_string)
-    except Exception as e:
-        if any(path.endswith(entry) for entry in exclude_yaml):
-            return {}
-        print('Un-skipped YAML error at {}'.format(path))
-        print()
-        print(' ------------- text -------------')
-        print(doc_string)
-        print(' --------------------------------')
-        raise
-    return data
 
 
 # TODO: figure out how to make this not crazy hacky
@@ -182,7 +154,6 @@ for line in sys.stdin:
         assert os.path.exists(path)
         validated_paths.add(path)
 
-        # plugin_data = parse_file(path)
         if path_parts[5] == 'doc_fragments':
             fragments = ast_fragment_parse(path)
             check_requirements = list(fragments.values())
