@@ -429,7 +429,6 @@
     "python-consul",
     "pyhcl",
     "subscription-manager",
-    "json",
     "firewalld >= 0.2.11",
     "a2enmod",
     "a2dismod",
@@ -566,7 +565,6 @@
     "docker==4.1.0",
     "molecule==2.22",
     "python-vagrant==0.5.15",
-    "# sh 1.13.1 causes molecule yamllint to fail.",
     "sh<1.13,==1.13.1",
     "pymongo>=3,>= 2.4 (python library)"
   ],
@@ -576,7 +574,6 @@
     "The remote EC2 linux instance must have the curl installed.",
     "boto3 >= 1.0.0,>= 1.4.4,>=1.4.4,>= 1.4.4 (for tagging),>= 1.5.0,>= 1.11.15,>=1.6,>= 1.6.0",
     "botocore >=1.10.26,>=1.5.24,>=1.10.0",
-    "json",
     "boto >= 2.37.0",
     "python-dateutil",
     "cryptography"

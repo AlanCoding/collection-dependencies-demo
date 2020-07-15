@@ -2,6 +2,7 @@ import sys
 import os
 import json
 import ast
+import glob
 
 from ansible.parsing.plugin_docs import read_docstring
 from ansible.parsing.yaml.loader import AnsibleLoader
@@ -16,11 +17,10 @@ excludes = (
     # ansible-doc google.cloud.gcp_pubsub_subscription
     'google/cloud/plugins/modules/gcp_pubsub_subscription.py',
 )
-validated_paths = set()
 req_data = {}
 
 
-EXCLUDE_REQUIREMENTS = (
+EXCLUDE_REQUIREMENTS = frozenset((
     'ansible',
     'ansible-base',
     'python', 'Python',
@@ -29,13 +29,14 @@ EXCLUDE_REQUIREMENTS = (
     '',
     'tox', 'pycodestyle', 'yamllint', 'voluptuous', 'pylint',
     'flake8', 'pytest', 'pytest-xdist', 'coverage', 'mock',
-    'requests'
-)
+    'requests',
+    'json'
+))
 
 
 def pkg(req):
     p = None
-    for sep in ('==', '>=', '>', '<', '<='):
+    for sep in frozenset(('==', '>=', '>', '<', '<=')):
         if sep in req:
             new_p = req.split(sep, 1)[0].strip()
             # If one of these occurs earlier than others, use that
@@ -47,7 +48,7 @@ def pkg(req):
 
 
 def exclude_req(req):
-    if req.startswith('-r '):
+    if req.startswith('-r ') or req.startswith('#'):
         return True
     if pkg(req) in EXCLUDE_REQUIREMENTS:
         return True
@@ -55,7 +56,7 @@ def exclude_req(req):
 
 
 def add_req(alist, req):
-    if req in alist or exclude_req(req):
+    if exclude_req(req) or req in alist:
         return
     for i in range(len(alist)):
         existing_req = alist[i]
@@ -92,7 +93,7 @@ def ast_fragment_parse(path):
         # TODO: okay, yes, it is pointless to list these up,
         # I will give up the goal of validation of the doc_fragment sub-keys...
         # but not today
-        assert key in (
+        assert key in set((
             'DOCUMENTATION',
             'ONTAP',  # deprecated
             'NA_ONTAP', 'SOLIDFIRE', 'AWSCVS',  # netapp
@@ -110,8 +111,10 @@ def ast_fragment_parse(path):
             'PROVIDER', 'TRANSITIONAL_PROVIDER', 'STATE', 'RULEBASE',
             'VSYS_DG', 'DEVICE_GROUP', 'VSYS_IMPORT', 'VSYS', 'TEMPLATE_ONLY',
             'FULL_TEMPLATE_SUPPORT',  # panos
-            'VCENTER_DOCUMENTATION'
-        ), (key, path)
+            'VCENTER_DOCUMENTATION',
+            'RETURN',  # return_common
+            'MANAGING_CONFIG', 'CONNECTIVITY',  # proxysql.py
+        )), (key, path)
         assert isinstance(thedef.value, ast.Str)
         data = AnsibleLoader(thedef.value.s, file_name=path).get_single_data()
         fragments[key] = data
@@ -133,7 +136,8 @@ for namespace in os.listdir(target_pythonpath):
 
         collection_dir = os.path.join(target_pythonpath, namespace, name)
         for candidate in os.listdir(collection_dir):
-            if 'requirement' in candidate and 'txt' in candidate:
+            # no thanks to python2
+            if ('requirement' in candidate) and ('txt' in candidate) and ('2.7' not in candidate):
                 with open(os.path.join(collection_dir, candidate), 'r') as f:
                     req_text = f.read()
                 req_text = req_text.strip()
@@ -141,54 +145,49 @@ for namespace in os.listdir(target_pythonpath):
                     add_req(req_data[fqcn], line)
 
 
-for line in sys.stdin:
-    line_ct += line.count('\n')
-    for subline in line.split('\n'):
-        if not subline:
-            continue
-        path, doc_line = subline.split(':', 1)
-        path = path.replace('//', '/')  # special to grep
-        path_parts = path.split(os.path.sep)
-        if path_parts[4] in ('tests', 'scripts'):
-            continue
-        if len(path_parts) != 7:
-            # identifies nested modules
-            if path_parts[5] != 'modules':
-                # should only apply for
-                # f5networks/f5_modules/f5_modules_source/devtools/stubs/library_module.py
-                print('Skipping {} because not a real module'.format(path))
-                continue
-        if path in validated_paths:
-            # References to DOCUMENTATION later in the file should not re-add that file
-            continue
-        assert path_parts[1] == 'ansible_collections', path_parts
-        namespace = path_parts[2]
-        name = path_parts[3]
+for path in glob.iglob(target_pythonpath.strip(os.path.sep) + '/**/*.py', recursive=True):
 
-        collection = '{}.{}'.format(namespace, name)
-        req_data.setdefault(collection, [])
+    path_parts = path.split(os.path.sep)
+    assert path_parts[1] == 'ansible_collections', path_parts
+    namespace = path_parts[2]
+    name = path_parts[3]
+    if len(path_parts) < 7:
+        continue  # no plugins and type folder like plugins/modules, plugins/inventory
+    if path_parts[4] != 'plugins':
+        continue
+    if path_parts[5] in ('terminal',):
+        continue
+    fname = path_parts[-1]
+    if fname in ('__init__.py',):
+        continue
 
-        if any(path.endswith(exclude) for exclude in excludes):
+    collection = '{}.{}'.format(namespace, name)
+    req_data.setdefault(collection, [])
+
+    if any(path.endswith(exclude) for exclude in excludes):
+        continue
+    assert os.path.exists(path)
+
+    if path_parts[5] == 'doc_fragments':
+        fragments = ast_fragment_parse(path)
+        check_requirements = list(fragments.values())
+    else:
+        plugin_data = read_docstring(path, verbose=False)['doc']
+        check_requirements = [plugin_data]
+
+    for plugin_data in check_requirements:
+        if plugin_data is None:
+            # print(f'Suspicious of plugin: {path}')
+            assert len(check_requirements) == 1
+            with open(path, 'r') as f:
+                assert 'DOCUMENTATION' not in f.read()
             continue
-        assert os.path.exists(path)
-        validated_paths.add(path)
-
-        if path_parts[5] == 'doc_fragments':
-            fragments = ast_fragment_parse(path)
-            check_requirements = list(fragments.values())
-        else:
-            plugin_data = read_docstring(path, verbose=False)['doc']
-            check_requirements = [plugin_data]
-        # print(json.dumps(read_docstring(path, verbose=False), indent=2))
-        for plugin_data in check_requirements:
-            if plugin_data is None:
-                print(path)
-                raise Exception('alan!')
-            if 'requirements' in plugin_data:
-                reqs = plugin_data['requirements']
-                assert isinstance(reqs, list)
-                for entry in reqs:
-                    add_req(req_data[collection], entry)
+        if 'requirements' in plugin_data:
+            reqs = plugin_data['requirements']
+            assert isinstance(reqs, list)
+            for entry in reqs:
+                add_req(req_data[collection], entry)
+    line_ct += 1
 
 
 with open('sniff_req/discovered.json', 'w') as f:
