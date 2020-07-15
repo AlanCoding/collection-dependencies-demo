@@ -90,31 +90,6 @@ def ast_fragment_parse(path):
         assert isinstance(thedef, ast.Assign), thedef
         assert len(thedef.targets) == 1
         key = thedef.targets[0].id
-        # TODO: okay, yes, it is pointless to list these up,
-        # I will give up the goal of validation of the doc_fragment sub-keys...
-        # but not today
-        assert key in set((
-            'DOCUMENTATION',
-            'ONTAP',  # deprecated
-            'NA_ONTAP', 'SOLIDFIRE', 'AWSCVS',  # netapp
-            'FA',  # flash array
-            'FB',  # flashblade
-            # foreman
-            'NESTED_PARAMETERS', 'OS_FAMILY', 'TAXONOMY', 'ENTITY_STATE',
-            'ENTITY_STATE_WITH_DEFAULTS', 'HOST_OPTIONS', 'ORGANIZATION',
-            'SCAP_DATASTREAM',
-            'VALIDATEETAG', 'FACTSPARAMS',  # oneview in community.general
-            'DOCKER_PY_1_DOCUMENTATION', 'DOCKER_PY_2_DOCUMENTATION',
-            'EMC_VNX',  # emc in community.general
-            'VX100',  # vexata
-            'OPENSTACK',
-            'PROVIDER', 'TRANSITIONAL_PROVIDER', 'STATE', 'RULEBASE',
-            'VSYS_DG', 'DEVICE_GROUP', 'VSYS_IMPORT', 'VSYS', 'TEMPLATE_ONLY',
-            'FULL_TEMPLATE_SUPPORT',  # panos
-            'VCENTER_DOCUMENTATION',
-            'RETURN',  # return_common
-            'MANAGING_CONFIG', 'CONNECTIVITY',  # proxysql.py
-        )), (key, path)
         assert isinstance(thedef.value, ast.Str)
         data = AnsibleLoader(thedef.value.s, file_name=path).get_single_data()
         fragments[key] = data
