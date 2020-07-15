@@ -12,12 +12,9 @@ line_ct = 0
 
 
 excludes = (
-    # this has DOCUMENTATION in a comment before the DOCUMENTATION
-    # so parsing it is probably not worth it
-    'community/general/plugins/callback/counter_enabled.py',
     # genuinely bad yaml, the command gives error:
     # ansible-doc google.cloud.gcp_pubsub_subscription
-    'google/cloud/plugins/modules/gcp_pubsub_subscription.py'
+    'google/cloud/plugins/modules/gcp_pubsub_subscription.py',
 )
 validated_paths = set()
 req_data = {}
@@ -145,12 +142,6 @@ for line in sys.stdin:
 
         if any(path.endswith(exclude) for exclude in excludes):
             continue
-        doc_line = doc_line.strip()
-        assert doc_line.startswith('DOCUMENTATION = '), (path, doc_line)
-        doc_line = doc_line[len('DOCUMENTATION = '):]
-        if doc_line.startswith('r'):
-            doc_line = doc_line[1:]
-        assert doc_line[:3] in ('"""', "'''")
         assert os.path.exists(path)
         validated_paths.add(path)
 
