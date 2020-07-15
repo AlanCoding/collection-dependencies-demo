@@ -287,3 +287,6 @@ Next, hooked in doc_fragments which goes by `fragment_loader`
  - Ansible actual collection loader 4070
  - Direct python import 201
  - Import in subprocess to obtain isolation 192
+
+Running with Ansible 2.9 is a bit rockier with numbers of 2371 287 1670.
+Thankfully, however, it gives the same results.

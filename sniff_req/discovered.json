@@ -36,11 +36,13 @@
     "netapp-lib 2020.3.12 is strongly recommended as it provides better error reporting for connection issues.",
     "To enable http on the cluster you must run the following commands 'set -privilege advanced;' 'system services web modify -http-enabled true;'",
     "netapp_lib",
-    "Python package ipaddress. Install using 'pip install ipaddress'"
+    "Python package ipaddress. Install using 'pip install ipaddress'",
+    "See respective platform section for more details"
   ],
   "netapp.elementsw": [
     "The modules were developed with SolidFire 10.1",
-    "solidfire-sdk-python (1.1.0.92) or greater. Install using 'pip install solidfire-sdk-python'"
+    "solidfire-sdk-python (1.1.0.92) or greater. Install using 'pip install solidfire-sdk-python'",
+    "See respective platform section for more details"
   ],
   "netapp.aws": [
     "See respective platform section for more details"
@@ -129,12 +131,14 @@
   ],
   "purestorage.flasharray": [
     "purestorage >= 1.16",
-    "netaddr"
+    "netaddr",
+    "See separate platform section for more details"
   ],
   "purestorage.flashblade": [
     "purity_fb >= 1.9",
     "netaddr",
-    "pytz"
+    "pytz",
+    "See separate platform section for more details"
   ],
   "cisco.intersight": [],
   "cisco.mso": [
@@ -563,7 +567,19 @@
     "netstat",
     "This module requires parted version 1.8.3 and above",
     "align option (except 'undefined') requires parted 2.1 and above",
-    "footmark >= 1.13.0"
+    "footmark >= 1.13.0",
+    "See separate platform section for more details",
+    "purestorage",
+    "Docker SDK for Python: Please note that the L(docker-py,https://pypi.org/project/docker-py/) Python module has been superseded by L(docker,https://pypi.org/project/docker/) (see L(here,https://github.com/docker/docker-py/issues/1310) for details). For Python 2.6, C(docker-py) must be used. Otherwise, it is recommended to install the C(docker) Python module. Note that both modules should *not* be installed at the same time. Also note that when both modules are installed and one of them is uninstalled, the other might no longer function and a reinstall of it is required.",
+    "See respective platform section for more details",
+    "A physical or virtual clustered Data ONTAP system. The modules were developed with Clustered Data ONTAP 8.3",
+    "Ansible 2.2",
+    "netapp-lib (2015.9.25). Install using 'pip install netapp-lib'",
+    "A physical or virtual clustered Data ONTAP system. The modules support Data ONTAP 9.1 and onward",
+    "Ansible 2.6",
+    "Python2 netapp-lib (2017.10.30) or later. Install using 'pip install netapp-lib'",
+    "Python3 netapp-lib (2018.11.13) or later. Install using 'pip install netapp-lib'",
+    "To enable http on the cluster you must run the following commands 'set -privilege advanced;' 'system services web modify -http-enabled true;'"
   ],
   "community.network": [
     "ingatesdk >= 1.0.6",
