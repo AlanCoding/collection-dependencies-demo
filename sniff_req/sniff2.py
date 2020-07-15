@@ -33,15 +33,44 @@ EXCLUDE_REQUIREMENTS = (
 )
 
 
-def exclude_req(req):
-    pkg = req
+def pkg(req):
+    p = None
     for sep in ('==', '>=', '>', '<', '<='):
         if sep in req:
-            pkg = req.split(sep, 1)[0].strip()
-            break
-    if pkg in EXCLUDE_REQUIREMENTS:
+            new_p = req.split(sep, 1)[0].strip()
+            # If one of these occurs earlier than others, use that
+            if p is None or len(new_p) < len(p):
+                p = new_p
+    if p is not None:
+        return p
+    return req
+
+
+def exclude_req(req):
+    if req.startswith('-r '):
+        return True
+    if pkg(req) in EXCLUDE_REQUIREMENTS:
         return True
     return False
+
+
+def add_req(alist, req):
+    if req in alist or exclude_req(req):
+        return
+    for i in range(len(alist)):
+        existing_req = alist[i]
+        existing_pkg = pkg(existing_req)
+        new_pkg = pkg(req)
+        if new_pkg == existing_pkg:
+            new_spec = req[len(new_pkg):].strip()
+            if not new_spec or new_spec in existing_req:
+                return
+            if existing_pkg == existing_req:
+                alist[i] = ' '.join([existing_req, new_spec])
+            else:
+                alist[i] = ','.join([existing_req, new_spec])
+            return
+    alist.append(req)
 
 
 def ast_fragment_parse(path):
@@ -109,8 +138,7 @@ for namespace in os.listdir(target_pythonpath):
                     req_text = f.read()
                 req_text = req_text.strip()
                 for line in req_text.split('\n'):
-                    if not exclude_req(line) and line not in req_data.get(fqcn, []):
-                        req_data[fqcn].append(line)
+                    add_req(req_data[fqcn], line)
 
 
 for line in sys.stdin:
@@ -160,10 +188,7 @@ for line in sys.stdin:
                 reqs = plugin_data['requirements']
                 assert isinstance(reqs, list)
                 for entry in reqs:
-                    if exclude_req(entry):
-                        continue
-                    if entry not in req_data[collection]:
-                        req_data[collection].append(entry)
+                    add_req(req_data[collection], entry)
 
 
 with open('sniff_req/discovered.json', 'w') as f:
