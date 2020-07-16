@@ -14,8 +14,7 @@
     "keystoneauth1>=3.4.0,>= 3.4.0",
     "jsonpatch",
     "rstcheck",
-    "ruamel.yaml",
-    "galaxy-importer"
+    "ruamel.yaml"
   ],
   "netbox.netbox": [
     "pynetbox"

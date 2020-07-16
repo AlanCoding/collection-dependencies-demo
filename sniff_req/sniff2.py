@@ -32,7 +32,7 @@ EXCLUDE_REQUIREMENTS = frozenset((
     'requests',
     'json',
     'ansible-lint', 'molecule', 'ssl',
-    'whitelist in configuration'
+    'whitelist in configuration', 'galaxy-importer'
 ))
 
 
@@ -138,6 +138,12 @@ for path in glob.iglob(target_pythonpath.strip(os.path.sep) + '/**/*.py', recurs
     if fname in ('__init__.py',):
         continue
 
+    # part optimization, also enables stricter validation logic
+    if path_parts[5] != 'doc_fragments':
+        with open(path, 'r') as f:
+            if 'DOCUMENTATION' not in f.read():
+                continue
+
     collection = '{}.{}'.format(namespace, name)
     req_data.setdefault(collection, [])
 
@@ -154,11 +160,8 @@ for path in glob.iglob(target_pythonpath.strip(os.path.sep) + '/**/*.py', recurs
 
     for plugin_data in check_requirements:
         if plugin_data is None:
-            # print(f'Suspicious of plugin: {path}')
-            assert len(check_requirements) == 1
-            with open(path, 'r') as f:
-                assert 'DOCUMENTATION' not in f.read()
-            continue
+            print(path)
+            raise Exception('Failed to correctly parse the DOCUMENTATION!')
         if 'requirements' in plugin_data:
             reqs = plugin_data['requirements']
             assert isinstance(reqs, list)
