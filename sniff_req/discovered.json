@@ -111,8 +111,7 @@
   "awx.awx": [
     "pytz",
     "python.dateutil >= 2.7.0",
-    "ansible-tower-cli >= 3.3.0,>= 3.0.2",
-    "pyyaml"
+    "ansible-tower-cli >= 3.3.0,>= 3.0.2"
   ],
   "purestorage.flasharray": [
     "purestorage >= 1.16",
@@ -172,7 +171,6 @@
     "whitelisting in configuration",
     "set as main display callback",
     "whitelisting in configuration - see examples section below for details.",
-    "whitelist in configuration",
     "cgroups",
     "set as stdout in configuration",
     "Set as stdout in config",
@@ -194,7 +192,6 @@
     "This is due to the reliance on the WMI provider MSFT_SmbShare U(https://msdn.microsoft.com/en-us/library/hh830471) which was only added with these Windows releases."
   ],
   "ansible.base": [
-    "whitelist in configuration",
     "pypsrp (Python library)",
     "pywinrm (python library)",
     "junit_xml (python lib)",
@@ -321,17 +318,14 @@
     "L(Docker SDK for Python,https://docker-py.readthedocs.io/en/stable/) >= 1.10.0,>= 2.1.0,>= 1.8.0 (use L(docker-py,https://pypi.org/project/docker-py/) for Python 2.6),>= 2.4.0,>= 1.10.0 (use L(docker-py,https://pypi.org/project/docker-py/) for Python 2.6),>= 2.0.2,>= 2.6.0,>= 2.0.0",
     "whitelisting in configuration",
     "set as main display callback",
-    "whitelist in configuration",
     "LogDNA Python Library (https://github.com/logdna/python)",
     "xmpp (python lib https://github.com/ArchipelProject/xmpppy)",
     "set as stdout callback in ansible.cfg  (stdout_callback = counter_enabled)",
     "set as stdout callback in configuration",
     "set as stdout in configuration",
-    "whitelist in configuration.",
     "prettytable (python lib)",
     "the '/usr/bin/say' command line program (standard on macOS) or 'espeak' command line program",
     "set as stdout_callback in configuration",
-    "Whitelist in configuration",
     "A writeable /var/log/ansible/hosts directory by the user executing Ansible on the controller",
     "certifi (python library)",
     "flatdict (python library), if you want to use the 'flatten' option",
@@ -361,7 +355,6 @@
     "nailgun >= 0.28.0",
     "datetime",
     "jsondiff",
-    "pyyaml",
     "docker-compose >= 1.7.0",
     "libselinux",
     "policycoreutils",
@@ -506,7 +499,6 @@
     "grpcio",
     "ejabberd with mod_admin_extra",
     "netstat",
-    "This module requires parted version 1.8.3 and above",
     "align option (except 'undefined') requires parted 2.1 and above",
     "See separate platform section for more details",
     "purestorage",
@@ -561,9 +553,7 @@
     "python-lxml"
   ],
   "community.mongodb": [
-    "ansible-lint==4.2.0",
     "docker==4.1.0",
-    "molecule==2.22",
     "python-vagrant==0.5.15",
     "sh<1.13,==1.13.1",
     "pymongo>=3,>= 2.4 (python library)"
@@ -621,17 +611,13 @@
     "selinux",
     "pyvmomi (Python library)",
     "requests (Python library)",
-    "PyVmomi",
     "vSphere Automation SDK - For tag feature",
     "vCloud Suite SDK - For tag feature",
     "vSphere Automation SDK",
     "Tested on ESXi 5.5 and 6.5.",
     "PyVmomi installed.",
     "Tested on vSphere 5.5 and 6.5",
-    "PyVmomi installed",
-    "pyVmomi",
     "pyvcloud <= 18.2.2",
-    "ssl",
     "socket",
     "hashlib",
     "VMware vSAN Python's SDK"

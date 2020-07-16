@@ -23,14 +23,16 @@ req_data = {}
 EXCLUDE_REQUIREMENTS = frozenset((
     'ansible',
     'ansible-base',
-    'python', 'Python',
-    'yaml', 'PyYAML',
-    'six.moves.StringIO', 'sys',
+    'python',
+    'yaml', 'pyyaml',
+    'six.moves.stringio', 'sys',
     '',
     'tox', 'pycodestyle', 'yamllint', 'voluptuous', 'pylint',
     'flake8', 'pytest', 'pytest-xdist', 'coverage', 'mock',
     'requests',
-    'json'
+    'json',
+    'ansible-lint', 'molecule', 'ssl',
+    'whitelist in configuration'
 ))
 
 
@@ -43,8 +45,8 @@ def pkg(req):
             if p is None or len(new_p) < len(p):
                 p = new_p
     if p is not None:
-        return p
-    return req
+        return p.lower().strip('.').strip()
+    return req.lower().strip('.').strip()
 
 
 def exclude_req(req):
