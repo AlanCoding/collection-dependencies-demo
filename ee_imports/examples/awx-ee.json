@@ -1,0 +1,273 @@
+{
+    "bad_deps": {
+        "ansible.netcommon": {
+            "HAS_GENIE": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.pyats_parser"
+            ],
+            "HAS_NAPALM": [
+                "ansible_collections.ansible.netcommon.plugins.connection.napalm"
+            ],
+            "HAS_NTC": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.ntc_templates_parser"
+            ],
+            "HAS_PYATS": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.pyats_parser"
+            ],
+            "HAS_SCP": [
+                "ansible_collections.ansible.netcommon.plugins.connection.network_cli"
+            ],
+            "HAS_TEXTFSM": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.textfsm_parser",
+                "ansible_collections.ansible.netcommon.plugins.filter.network"
+            ],
+            "HAS_TTP": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.ttp_parser"
+            ]
+        },
+        "ansible.posix": {
+            "HAS_SELINUX": [
+                "ansible_collections.ansible.posix.plugins.modules.selinux"
+            ]
+        },
+        "awx.awx": {
+            "HAS_TOWER_CLI": [
+                "ansible_collections.awx.awx.plugins.modules.tower_send",
+                "ansible_collections.awx.awx.plugins.modules.tower_receive",
+                "ansible_collections.awx.awx.plugins.module_utils.tower_legacy"
+            ]
+        },
+        "community.vmware": {
+            "HAS_PYVCLOUD": [
+                "ansible_collections.community.vmware.plugins.module_utils.vca"
+            ],
+            "HAS_VSANPYTHONSDK": [
+                "ansible_collections.community.vmware.plugins.modules.vmware_vsan_health_info",
+                "ansible_collections.community.vmware.plugins.modules.vmware_cluster_vsan"
+            ]
+        },
+        "google.cloud": {
+            "HAS_GOOGLE_STORAGE_LIBRARY": [
+                "ansible_collections.google.cloud.plugins.modules.gcp_storage_object"
+            ]
+        },
+        "theforeman.foreman": {
+            "HAS_DEBFILE": [
+                "ansible_collections.theforeman.foreman.plugins.modules.content_upload"
+            ],
+            "HAS_RPM": [
+                "ansible_collections.theforeman.foreman.plugins.modules.content_upload"
+            ]
+        }
+    },
+    "changed": false,
+    "error_paths": [
+        [
+            "ansible_collections.ovirt.ovirt.plugins.module_utils.ovirt",
+            "Traceback (most recent call last):\n  File \"/alan/try_import.py\", line 51, in <module>\n    py_module = importlib.import_module(import_string)\n  File \"/usr/lib64/python3.8/importlib/__init__.py\", line 127, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n  File \"<frozen importlib._bootstrap>\", line 1014, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 991, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 975, in _find_and_load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 655, in _load_unlocked\n  File \"<frozen importlib._bootstrap>\", line 618, in _load_backward_compatible\n  File \"/usr/local/lib/python3.8/site-packages/ansible/utils/collection_loader/_collection_finder.py\", line 375, in load_module\n    code_obj = self.get_code(fullname)\n  File \"/usr/local/lib/python3.8/site-packages/ansible/utils/collection_loader/_collection_finder.py\", line 456, in get_code\n    self._compiled_code = compile(source=source_code, filename=filename, mode='exec', flags=0, dont_inherit=True)\n  File \"/usr/share/ansible/collections/ansible_collections/ovirt/ovirt/plugins/module_utils/ovirt.py\", line 32\n    from ansible_collections.@NAMESPACE@.@NAME@.plugins.module_utils.cloud import CloudRetry\n                             ^\nSyntaxError: invalid syntax\n"
+        ]
+    ],
+    "failed": false,
+    "good_deps": {
+        "amazon.aws": {
+            "HAS_BOTO": [
+                "ansible_collections.amazon.aws.plugins.modules.ec2_elb_lb",
+                "ansible_collections.amazon.aws.plugins.modules.ec2_snapshot",
+                "ansible_collections.amazon.aws.plugins.modules.ec2_vpc_dhcp_option",
+                "ansible_collections.amazon.aws.plugins.modules.ec2",
+                "ansible_collections.amazon.aws.plugins.module_utils.ec2"
+            ],
+            "HAS_BOTO3": [
+                "ansible_collections.amazon.aws.plugins.module_utils.core",
+                "ansible_collections.amazon.aws.plugins.module_utils.urls",
+                "ansible_collections.amazon.aws.plugins.module_utils.ec2",
+                "ansible_collections.amazon.aws.plugins.lookup.aws_ssm"
+            ],
+            "HAS_MD5": [
+                "ansible_collections.amazon.aws.plugins.modules.aws_s3",
+                "ansible_collections.amazon.aws.plugins.module_utils.s3"
+            ]
+        },
+        "ansible.netcommon": {
+            "HAS_JINJA2": [
+                "ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils"
+            ],
+            "HAS_JXMLEASE": [
+                "ansible_collections.ansible.netcommon.plugins.modules.netconf_rpc",
+                "ansible_collections.ansible.netcommon.plugins.modules.netconf_get"
+            ],
+            "HAS_LXML": [
+                "ansible_collections.ansible.netcommon.plugins.module_utils.utils.data"
+            ],
+            "HAS_NCCLIENT": [
+                "ansible_collections.ansible.netcommon.plugins.connection.netconf",
+                "ansible_collections.ansible.netcommon.plugins.module_utils.network.common.netconf"
+            ],
+            "HAS_PYLIBSSH": [
+                "ansible_collections.ansible.netcommon.plugins.connection.libssh"
+            ],
+            "HAS_XMLTODICT": [
+                "ansible_collections.ansible.netcommon.plugins.module_utils.utils.data",
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.xml_parser"
+            ],
+            "HAS_YAML": [
+                "ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils",
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.native_parser",
+                "ansible_collections.ansible.netcommon.plugins.filter.network"
+            ]
+        },
+        "awx.awx": {
+            "HAS_AWX_KIT": [
+                "ansible_collections.awx.awx.plugins.module_utils.tower_awxkit"
+            ],
+            "HAS_EXPORTABLE_RESOURCES": [
+                "ansible_collections.awx.awx.plugins.modules.tower_export",
+                "ansible_collections.awx.awx.plugins.modules.tower_import"
+            ],
+            "HAS_YAML": [
+                "ansible_collections.awx.awx.plugins.modules.tower_settings",
+                "ansible_collections.awx.awx.plugins.module_utils.tower_module"
+            ]
+        },
+        "azure.azcollection": {
+            "HAS_AZURE": [
+                "ansible_collections.azure.azcollection.plugins.modules.azure_rm_dnsrecordset",
+                "ansible_collections.azure.azcollection.plugins.modules.azure_rm_privatednsrecordset",
+                "ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common"
+            ],
+            "HAS_AZURE_CLI_CORE": [
+                "ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common"
+            ],
+            "HAS_MSRESTAZURE": [
+                "ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common"
+            ],
+            "HAS_PACKAGING_VERSION": [
+                "ansible_collections.azure.azcollection.plugins.module_utils.azure_rm_common"
+            ]
+        },
+        "community.kubernetes": {
+            "HAS_GENERATE_HASH": [
+                "ansible_collections.community.kubernetes.plugins.filter.k8s"
+            ],
+            "HAS_K8S_APPLY": [
+                "ansible_collections.community.kubernetes.plugins.module_utils.common"
+            ],
+            "HAS_K8S_CONFIG_HASH": [
+                "ansible_collections.community.kubernetes.plugins.module_utils.common"
+            ],
+            "HAS_K8S_INSTANCE_HELPER": [
+                "ansible_collections.community.kubernetes.plugins.modules.k8s_cluster_info",
+                "ansible_collections.community.kubernetes.plugins.module_utils.common"
+            ],
+            "HAS_K8S_MODULE_HELPER": [
+                "ansible_collections.community.kubernetes.plugins.inventory.k8s",
+                "ansible_collections.community.kubernetes.plugins.module_utils.common",
+                "ansible_collections.community.kubernetes.plugins.lookup.k8s"
+            ],
+            "HAS_REQUESTS": [
+                "ansible_collections.community.kubernetes.plugins.modules.k8s_auth"
+            ],
+            "HAS_REQUESTS_OAUTH": [
+                "ansible_collections.community.kubernetes.plugins.modules.k8s_auth"
+            ],
+            "HAS_URLLIB3": [
+                "ansible_collections.community.kubernetes.plugins.modules.k8s_auth"
+            ],
+            "HAS_YAML": [
+                "ansible_collections.community.kubernetes.plugins.module_utils.common",
+                "ansible_collections.community.kubernetes.plugins.module_utils.helm"
+            ]
+        },
+        "community.vmware": {
+            "HAS_COLLECTIONS_COUNTER": [
+                "ansible_collections.community.vmware.plugins.modules.vmware_dvs_host"
+            ],
+            "HAS_PYVMOMI": [
+                "ansible_collections.community.vmware.plugins.modules.vmware_vmkernel_ip_config",
+                "ansible_collections.community.vmware.plugins.modules.vmware_guest",
+                "ansible_collections.community.vmware.plugins.modules.vmware_vsan_health_info",
+                "ansible_collections.community.vmware.plugins.modules.vmware_migrate_vmk",
+                "ansible_collections.community.vmware.plugins.modules.vmware_vsan_cluster",
+                "ansible_collections.community.vmware.plugins.modules.vmware_resource_pool",
+                "ansible_collections.community.vmware.plugins.modules.vmware_vm_vss_dvs_migrate",
+                "ansible_collections.community.vmware.plugins.modules.vmware_dns_config",
+                "ansible_collections.community.vmware.plugins.connection.vmware_tools",
+                "ansible_collections.community.vmware.plugins.inventory.vmware_vm_inventory",
+                "ansible_collections.community.vmware.plugins.module_utils.vmware_rest_client",
+                "ansible_collections.community.vmware.plugins.module_utils.vmware"
+            ],
+            "HAS_PYVMOMIJSON": [
+                "ansible_collections.community.vmware.plugins.modules.vmware_vsan_health_info",
+                "ansible_collections.community.vmware.plugins.module_utils.vmware"
+            ],
+            "HAS_REQUESTS": [
+                "ansible_collections.community.vmware.plugins.connection.vmware_tools",
+                "ansible_collections.community.vmware.plugins.inventory.vmware_vm_inventory",
+                "ansible_collections.community.vmware.plugins.module_utils.vmware_rest_client",
+                "ansible_collections.community.vmware.plugins.module_utils.vmware"
+            ],
+            "HAS_URLLIB3": [
+                "ansible_collections.community.vmware.plugins.connection.vmware_tools"
+            ],
+            "HAS_VAUTOMATION_PYTHON_SDK": [
+                "ansible_collections.community.vmware.plugins.modules.vmware_content_library_manager",
+                "ansible_collections.community.vmware.plugins.modules.vmware_content_deploy_ovf_template",
+                "ansible_collections.community.vmware.plugins.modules.vmware_content_deploy_template"
+            ],
+            "HAS_VSPHERE": [
+                "ansible_collections.community.vmware.plugins.modules.vmware_guest_info",
+                "ansible_collections.community.vmware.plugins.modules.vmware_guest_facts",
+                "ansible_collections.community.vmware.plugins.inventory.vmware_vm_inventory",
+                "ansible_collections.community.vmware.plugins.module_utils.vmware_rest_client"
+            ]
+        },
+        "google.cloud": {
+            "HAS_GOOGLE_LIBRARIES": [
+                "ansible_collections.google.cloud.plugins.inventory.gcp_compute",
+                "ansible_collections.google.cloud.plugins.module_utils.gcp_utils"
+            ],
+            "HAS_REQUESTS": [
+                "ansible_collections.google.cloud.plugins.module_utils.gcp_utils"
+            ]
+        },
+        "openstack.cloud": {
+            "HAS_JSONPATCH": [
+                "ansible_collections.openstack.cloud.plugins.modules.baremetal_node",
+                "ansible_collections.openstack.cloud.plugins.modules.os_ironic"
+            ],
+            "HAS_KEYSTONEAUTH1": [
+                "ansible_collections.openstack.cloud.plugins.modules.quota",
+                "ansible_collections.openstack.cloud.plugins.modules.os_quota"
+            ],
+            "HAS_OPENSTACKSDK": [
+                "ansible_collections.openstack.cloud.plugins.modules.config",
+                "ansible_collections.openstack.cloud.plugins.modules.os_client_config"
+            ],
+            "HAS_ORDEREDDICT": [
+                "ansible_collections.openstack.cloud.plugins.modules.port",
+                "ansible_collections.openstack.cloud.plugins.modules.os_port"
+            ],
+            "HAS_SDK": [
+                "ansible_collections.openstack.cloud.plugins.inventory.openstack"
+            ]
+        },
+        "ovirt.ovirt": {
+            "HAS_OVIRT_LIB": [
+                "ansible_collections.ovirt.ovirt.plugins.inventory.ovirt"
+            ]
+        },
+        "theforeman.foreman": {
+            "HAS_APYPIE": [
+                "ansible_collections.theforeman.foreman.plugins.module_utils.foreman_helper"
+            ],
+            "HAS_IPADDRESS": [
+                "ansible_collections.theforeman.foreman.plugins.modules.subnet"
+            ],
+            "HAS_PYYAML": [
+                "ansible_collections.theforeman.foreman.plugins.module_utils.foreman_helper"
+            ],
+            "HAS_REQUESTS": [
+                "ansible_collections.theforeman.foreman.plugins.callback.foreman"
+            ]
+        }
+    }
+}
