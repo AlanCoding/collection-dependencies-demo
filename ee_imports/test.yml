@@ -1,0 +1,67 @@
+# from https://github.com/vadikgo/ansible-docker-test/blob/master/docker-add-host.yml
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    container_name: alan_tests_imports
+    ee_image: quay.io/ansible/awx-ee
+  collections:
+    - community.general  # for docker
+    - containers.podman
+  tasks:
+    - name: start container
+      podman_container:
+        name: "{{ container_name }}"
+        hostname: "{{ container_name }}"
+        image: "{{ ee_image }}"
+        state: started
+        command: "sleep 1d"
+        volume:
+          - "{{ playbook_dir }}:/alan:Z"
+
+    - name: add container to inventory
+      add_host:
+        name: "{{ container_name }}"
+        ansible_host: "{{ container_name }}"
+        # ansible_user: root
+        ansible_connection: podman
+        groups: test_containers
+
+- hosts: test_containers
+  gather_facts: false
+  connection: local
+  collections:
+    - community.general  # for docker
+    - containers.podman
+  vars:
+    ansible_remote_tmp: "/tmp"
+  tasks:
+    - block:
+
+      - find_collection_modules:
+        register: search_result
+      - debug:
+          var: search_result.paths
+
+      - debug:
+          msg: "Number of modules found: {{ search_result.paths | length }}"
+
+      # # An alternative way of doing the same thing
+      # - command: "python /alan/try_import.py {{ item }}"
+      #   loop: "{{ search_result.paths }}"
+      #   register: import_result
+
+      - import_collection_modules:
+          module_list: search_result.paths
+        register: import_result
+
+      always:
+      - debug:
+          var: import_result
+
+      - name: destroy container
+        podman_container:
+          name: "{{ ansible_host }}"
+          state: absent
+        delegate_to: localhost
