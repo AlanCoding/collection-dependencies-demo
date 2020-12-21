@@ -1,9 +1,24 @@
-### Execution Environment Import Tester
+## Execution Environment Import Tester
 
 The playbook and modules here are an attempt to slap together a POC for
 diagnosing the completeness of execution environments.
 
-#### Background and Definitions
+### Usage
+
+I want to inspect the `quay.io/ansible/network-ee` execution environment,
+find out exactly what I can and can't run.
+
+```
+ansible-playbook -i localhost, test.yml -e ee_image=quay.io/ansible/network-ee -e examples/network-ee.json
+```
+
+This produces the output found in the examples folder.
+
+#### How long does this take?
+
+For the awx-ee, say a dozen major collections, it takes about 3 minutes.
+
+### Background and Definitions
 
 Ansible collections are, by definition, a collection of Ansible plugins
 and some other stuff like roles.

@@ -35,7 +35,7 @@
     - community.general  # for docker
     - containers.podman
   vars:
-    ansible_remote_tmp: "/tmp"
+    output_file: output.json
   tasks:
     - block:
 
@@ -53,12 +53,19 @@
       #   register: import_result
 
       - import_collection_modules:
-          module_list: search_result.paths
+          module_list: "{{ search_result.paths }}"
         register: import_result
 
       always:
       - debug:
           var: import_result
+
+      - name: write the result to a file
+        local_action:
+          module: copy
+          content: "{{ import_result | to_nice_json }}"
+          dest: "{{ output_file }}"
+
 
       - name: destroy container
         podman_container:

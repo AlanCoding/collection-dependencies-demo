@@ -1,0 +1,151 @@
+{
+    "bad_deps": {
+        "ansible.netcommon": {
+            "HAS_GENIE": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.pyats_parser"
+            ],
+            "HAS_NAPALM": [
+                "ansible_collections.ansible.netcommon.plugins.connection.napalm"
+            ],
+            "HAS_NTC": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.ntc_templates_parser"
+            ],
+            "HAS_PYATS": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.pyats_parser"
+            ],
+            "HAS_TEXTFSM": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.textfsm_parser",
+                "ansible_collections.ansible.netcommon.plugins.filter.network"
+            ],
+            "HAS_TTP": [
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.ttp_parser"
+            ]
+        },
+        "ansible.utils": {
+            "HAS_ANSIBLE_ARG_SPEC_VALIDATOR": [
+                "ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate"
+            ],
+            "HAS_JSONSCHEMA": [
+                "ansible_collections.ansible.utils.plugins.validate.jsonschema"
+            ],
+            "HAS_TEXTFSM": [
+                "ansible_collections.ansible.utils.plugins.cli_parsers.textfsm_parser"
+            ],
+            "HAS_TTP": [
+                "ansible_collections.ansible.utils.plugins.cli_parsers.ttp_parser"
+            ]
+        },
+        "junipernetworks.junos": {
+            "HAS_PYEZ": [
+                "ansible_collections.junipernetworks.junos.plugins.modules.junos_scp",
+                "ansible_collections.junipernetworks.junos.plugins.modules.junos_package",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.junos",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.facts"
+            ]
+        }
+    },
+    "changed": false,
+    "error_paths": [],
+    "failed": false,
+    "good_deps": {
+        "ansible.netcommon": {
+            "HAS_JINJA2": [
+                "ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils"
+            ],
+            "HAS_JXMLEASE": [
+                "ansible_collections.ansible.netcommon.plugins.modules.netconf_rpc",
+                "ansible_collections.ansible.netcommon.plugins.modules.netconf_get"
+            ],
+            "HAS_LXML": [
+                "ansible_collections.ansible.netcommon.plugins.module_utils.utils.data"
+            ],
+            "HAS_NCCLIENT": [
+                "ansible_collections.ansible.netcommon.plugins.connection.netconf",
+                "ansible_collections.ansible.netcommon.plugins.module_utils.network.common.netconf"
+            ],
+            "HAS_PYLIBSSH": [
+                "ansible_collections.ansible.netcommon.plugins.connection.libssh"
+            ],
+            "HAS_SCP": [
+                "ansible_collections.ansible.netcommon.plugins.connection.network_cli"
+            ],
+            "HAS_XMLTODICT": [
+                "ansible_collections.ansible.netcommon.plugins.module_utils.utils.data",
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.xml_parser"
+            ],
+            "HAS_YAML": [
+                "ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils",
+                "ansible_collections.ansible.netcommon.plugins.cli_parsers.native_parser",
+                "ansible_collections.ansible.netcommon.plugins.filter.network"
+            ]
+        },
+        "ansible.utils": {
+            "HAS_XMLTODICT": [
+                "ansible_collections.ansible.utils.plugins.cli_parsers.xml_parser"
+            ],
+            "HAS_YAML": [
+                "ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate",
+                "ansible_collections.ansible.utils.plugins.validate._base"
+            ]
+        },
+        "cisco.iosxr": {
+            "HAS_B64": [
+                "ansible_collections.cisco.iosxr.plugins.modules.iosxr_user"
+            ],
+            "HAS_NCCLIENT": [
+                "ansible_collections.cisco.iosxr.plugins.netconf.iosxr",
+                "ansible_collections.cisco.iosxr.plugins.module_utils.network.iosxr.iosxr"
+            ],
+            "HAS_XML": [
+                "ansible_collections.cisco.iosxr.plugins.module_utils.network.iosxr.iosxr"
+            ]
+        },
+        "cisco.nxos": {
+            "HAS_ORDEREDDICT": [
+                "ansible_collections.cisco.nxos.plugins.module_utils.network.nxos.nxos"
+            ],
+            "HAS_PEXPECT": [
+                "ansible_collections.cisco.nxos.plugins.action.nxos_file_copy"
+            ],
+            "HAS_SCP": [
+                "ansible_collections.cisco.nxos.plugins.action.nxos_file_copy"
+            ],
+            "HAS_YAML": [
+                "ansible_collections.cisco.nxos.plugins.module_utils.network.nxos.nxos"
+            ]
+        },
+        "junipernetworks.junos": {
+            "HAS_JXMLEASE": [
+                "ansible_collections.junipernetworks.junos.plugins.modules.junos_command"
+            ],
+            "HAS_LXML": [
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.junos",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.lldp_global.lldp_global",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.vlans.vlans",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.l3_interfaces.l3_interfaces",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.ospfv3.ospfv3",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.lag_interfaces.lag_interfaces",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.lacp.lacp",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.acl_interfaces.acl_interfaces",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.lacp_interfaces.lacp_interfaces",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.lldp_interfaces.lldp_interfaces",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.interfaces.interfaces",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.ospf.ospf",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.static_routes.static_routes",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.l2_interfaces.l2_interfaces",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.acls.acls"
+            ],
+            "HAS_NCCLIENT": [
+                "ansible_collections.junipernetworks.junos.plugins.netconf.junos",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.utils.utils"
+            ],
+            "HAS_XMLTODICT": [
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.ospfv3.ospfv3",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.acl_interfaces.acl_interfaces",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.ospf.ospf",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.static_routes.static_routes",
+                "ansible_collections.junipernetworks.junos.plugins.module_utils.network.junos.facts.acls.acls"
+            ]
+        }
+    }
+}

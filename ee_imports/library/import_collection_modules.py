@@ -20,7 +20,7 @@ description:
 options:
     module_list:
       description:
-        - Module to test the import of.
+        - List of modules to test the import of.
           This is a hacky thing, and will accept an absolute path string,
           or alternatively, the python module import.
       required: True
@@ -55,31 +55,18 @@ def main():
             if not module_thing.endswith('.py'):
                 module.fail_json(msg='The path {} is not a python file.'.format(module_thing))
             import_parts = module_thing.rsplit('.', 1)[0].split(os.path.sep)
-            # if import_parts[-1] != 'py':
-            #     module.fail_json(msg='The path {} is not a python file. {}'.format(module_thing, import_parts))
             start_idx = import_parts.index('ansible_collections')
             import_string = '.'.join(import_parts[start_idx:-1])
         else:
             import_string = module_thing
 
-        # try:
-        #     py_module = importlib.import_module(import_string)
-        #     for attr in dir(py_module):
-        #         if attr.startswith('HAS_'):
-        #             val = getattr(py_module, attr)
-        #             if val:
-        #                 good_deps.setdefault(attr, [])
-        #                 good_deps.append(import_string)
-        #             else:
-        #                 bad_deps.setdefault(attr, [])
-        #                 bad_deps.append(import_string)
-        # except Exception as e:
-        #     error_paths.append((import_string, str(e)))
+        if len(import_string.split('.')) < 6:
+            raise Exception('Bad value for module import string {}'.format(import_string))
 
         namespace, collection_name = import_string.split('.')[1:3]
         col_slug = '{}.{}'.format(namespace, collection_name)
 
-        args = ['python', '/alan/try_import.py', import_string]
+        args = ['python3', '/alan/try_import.py', import_string]
         rc, out, err = module.run_command(args)
 
         failed = False
